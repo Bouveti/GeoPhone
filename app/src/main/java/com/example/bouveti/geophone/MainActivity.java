@@ -13,13 +13,55 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.Locale;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    Spinner spinnerLangue;
+    Button btn;
+    Locale myLocale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*
+        Language settings
+         */
+        spinnerLangue = (Spinner) findViewById(R.id.spinnerLangue);
+        spinnerLangue.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int pos, long id) {
+                if (pos == 1) {
+                    Toast.makeText(parent.getContext(),
+                            " You have selected French", Toast.LENGTH_SHORT)
+                            .show();
+                    setLocale("fr");
+                } else if (pos == 2) {
+                    Toast.makeText(parent.getContext(),
+                            "You have selected English", Toast.LENGTH_SHORT)
+                            .show();
+                    setLocale("en");
+                }
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+            }
+
+        });
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -82,6 +124,9 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
+            overridePendingTransition(0,0);
+            finish();
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -97,5 +142,19 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void setLocale(String lang)
+    {
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+            Intent refresh = new Intent(this, MainActivity.class);
+        startActivity(refresh);
+        overridePendingTransition(0,0);
+        finish();
     }
 }
