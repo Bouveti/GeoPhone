@@ -29,51 +29,11 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    String lang = getResources().getConfiguration().locale.toString();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        /*
-        Language settings
-         */
-        ImageButton lang_button = (ImageButton) findViewById(R.id.lang_button);
-
-        if(lang.equals("en_US"))
-        {
-            lang_button.setImageResource(R.drawable.en_us);
-        } else if ( lang.equals("fr_FR"))
-        {
-            lang_button.setImageResource(R.drawable.fr_fr);
-        } else {
-            lang_button.setImageResource(R.drawable.fr_fr);
-        }
-
-        lang_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(lang.equals("en_US"))
-                {
-                    Toast.makeText(MainActivity.this,
-                            "Changement de langue pour le Français", Toast.LENGTH_SHORT)
-                            .show();
-                    setLocale(Locale.FRANCE);
-                } else if (lang.equals("fr_FR"))
-                {
-                    Toast.makeText(MainActivity.this,
-                            "Change of language for English", Toast.LENGTH_SHORT)
-                            .show();
-                    setLocale(Locale.US);
-                } else {
-                    Toast.makeText(MainActivity.this,
-                            "Changement de langue pour le Français", Toast.LENGTH_SHORT)
-                            .show();
-                    setLocale(Locale.FRANCE);
-                }
-            }
-        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -111,6 +71,19 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        String lang = getResources().getConfiguration().locale.toString();
+        MenuItem lang_item = menu.findItem(R.id.lang_setting);
+
+        if(lang.equals("en_US"))
+        {
+            lang_item.setIcon(R.drawable.en_us);
+        } else if ( lang.equals("fr_FR"))
+        {
+            lang_item.setIcon(R.drawable.fr_fr);
+        } else {
+            lang_item.setIcon(R.drawable.fr_fr);
+        }
         return true;
     }
 
@@ -122,7 +95,30 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.lang_setting) {
+            String lang = getResources().getConfiguration().locale.toString();
+
+            if(lang.equals("en_US"))
+            {
+                Toast.makeText(MainActivity.this,
+                        "Changement de langue pour le Français", Toast.LENGTH_SHORT)
+                        .show();
+                item.setIcon(R.drawable.fr_fr);
+                setLocale(Locale.FRANCE);
+            } else if (lang.equals("fr_FR"))
+            {
+                Toast.makeText(MainActivity.this,
+                        "Change of language for English", Toast.LENGTH_SHORT)
+                        .show();
+                item.setIcon(R.drawable.en_us);
+                setLocale(Locale.US);
+            } else {
+                Toast.makeText(MainActivity.this,
+                        "Changement de langue pour le Français", Toast.LENGTH_SHORT)
+                        .show();
+                item.setIcon(R.drawable.fr_fr);
+                setLocale(Locale.FRANCE);
+            }
             return true;
         }
 

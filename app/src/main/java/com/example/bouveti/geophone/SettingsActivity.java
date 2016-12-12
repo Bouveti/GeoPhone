@@ -29,41 +29,11 @@ import java.util.Locale;
 
 public class SettingsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    Spinner spinnerLangue;
-    Button btn;
-    Locale myLocale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        /*
-        Language settings
-         */
-        spinnerLangue = (Spinner) findViewById(R.id.spinnerLangue);
-        spinnerLangue.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int pos, long id) {
-                if (pos == 1) {
-                    Toast.makeText(parent.getContext(),
-                            " You have selected French", Toast.LENGTH_SHORT)
-                            .show();
-                    setLocale("fr_fr");
-                } else if (pos == 2) {
-                    Toast.makeText(parent.getContext(),
-                            "You have selected English", Toast.LENGTH_SHORT)
-                            .show();
-                    setLocale("en");
-                }
-            }
-
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-            }
-
-        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -112,7 +82,7 @@ public class SettingsActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.lang_setting) {
             return true;
         }
 
@@ -142,19 +112,5 @@ public class SettingsActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void setLocale(String lang)
-    {
-        Locale myLocale = new Locale(lang);
-        Resources res = getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.locale = myLocale;
-        res.updateConfiguration(conf, dm);
-        Intent refresh = new Intent(this, MainActivity.class);
-        startActivity(refresh);
-        overridePendingTransition(0,0);
-        finish();
     }
 }
