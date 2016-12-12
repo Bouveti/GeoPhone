@@ -17,6 +17,43 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_word"
-        android:id="@+id/textView2" />
+        android:id="@+id/hello_word" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hello_word"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/nom_app"
+        android:text="@string/nom_app" />
+
+    <Button
+        android:text="@string/button_associer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nom_app"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="82dp"
+        android:id="@+id/button_associer" />
+
+    <Button
+        android:text="@string/button_rechercher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="66dp"
+        android:id="@+id/button_rechercher"
+        android:layout_below="@+id/button_associer"
+        android:layout_centerHorizontal="true"
+        android:onClick="ToRecherche"
+        />
+
+    <Button
+        android:text="@string/button_rechercher_par_mdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:id="@+id/button_rechercher_par_mdp"
+        android:layout_below="@+id/button_rechercher"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
