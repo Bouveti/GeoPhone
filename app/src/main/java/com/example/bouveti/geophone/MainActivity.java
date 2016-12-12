@@ -3,6 +3,7 @@ package com.example.bouveti.geophone;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,15 +21,15 @@ import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    Spinner spinnerLangue;
-    Button btn;
-    Locale myLocale;
+
+    String lang = getResources().getConfiguration().locale.toString();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,28 +39,40 @@ public class MainActivity extends AppCompatActivity
         /*
         Language settings
          */
-        spinnerLangue = (Spinner) findViewById(R.id.spinnerLangue);
-        spinnerLangue.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        ImageButton lang_button = (ImageButton) findViewById(R.id.lang_button);
 
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int pos, long id) {
-                if (pos == 1) {
-                    Toast.makeText(parent.getContext(),
-                            " You have selected French", Toast.LENGTH_SHORT)
+        if(lang.equals("en_US"))
+        {
+            lang_button.setImageResource(R.drawable.en_us);
+        } else if ( lang.equals("fr_FR"))
+        {
+            lang_button.setImageResource(R.drawable.fr_fr);
+        } else {
+            lang_button.setImageResource(R.drawable.fr_fr);
+        }
+
+        lang_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(lang.equals("en_US"))
+                {
+                    Toast.makeText(MainActivity.this,
+                            "Changement de langue pour le Français", Toast.LENGTH_SHORT)
                             .show();
-                    setLocale("fr");
-                } else if (pos == 2) {
-                    Toast.makeText(parent.getContext(),
-                            "You have selected English", Toast.LENGTH_SHORT)
+                    setLocale(Locale.FRANCE);
+                } else if (lang.equals("fr_FR"))
+                {
+                    Toast.makeText(MainActivity.this,
+                            "Change of language for English", Toast.LENGTH_SHORT)
                             .show();
-                    setLocale("en");
+                    setLocale(Locale.US);
+                } else {
+                    Toast.makeText(MainActivity.this,
+                            "Changement de langue pour le Français", Toast.LENGTH_SHORT)
+                            .show();
+                    setLocale(Locale.FRANCE);
                 }
             }
-
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-            }
-
         });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -144,15 +157,14 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void setLocale(String lang)
+    public void setLocale(Locale lang)
     {
-        Locale myLocale = new Locale(lang);
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
         Configuration conf = res.getConfiguration();
-        conf.locale = myLocale;
+        conf.locale = lang;
         res.updateConfiguration(conf, dm);
-            Intent refresh = new Intent(this, MainActivity.class);
+        Intent refresh = new Intent(this, MainActivity.class);
         startActivity(refresh);
         overridePendingTransition(0,0);
         finish();
