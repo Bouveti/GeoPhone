@@ -7,7 +7,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="95ce700f0c30c352021e6bbf4683f4830d2d0904">
+        sha1="c06d2d6af27ffa30003de6753b04fcc7af2e7e4b">
         <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_865f37d7bff8a61c5dfe9df7aa82e3b6618133b7\classes.dex" />
     </item>
     <item
@@ -30,6 +30,78 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="9690e4d63a4e8c7798188fdccaa04562aa26e11c">
+        <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_ce23b2e739d6f47993577101b3944fb2a9392ad2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_a7d491dd539454a7d514345d2b56388de61db712\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_b3adc9658bf7a256f066c53f1e08dada411ba031\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\alexi\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\24.2.1\support-annotations-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
+        <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.2.1_daf54cfc5e7cf3ca5f5fa5f37b43e0c846eee1a4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
+        <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_a417552b5e374a4abb0b073124ca02a92c735e02\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.2.1_232d44637dd79bad0603f46e00970534dd6e2040\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.1_cd08db55b4800c00ef0afd78f0c1e34362ca6663\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_eac032d55327feeab31094a24d841a4fc5b285d6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
@@ -45,15 +117,6 @@
         revision="24.0.3"
         sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
         <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_4386e55251fb028b922f46c972fa3ba0c0ac8b9f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="a8b776f92c890d2e8467c94a6c88fdb31278a441">
-        <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_ce23b2e739d6f47993577101b3944fb2a9392ad2\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -84,39 +147,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
-        <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_a7d491dd539454a7d514345d2b56388de61db712\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
         sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
         <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.2.1_a6caae8b0143f9a24e1e576e2a8f0b2cca055b8f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="867dad63c33388ff8c7644b236579355036d075f">
-        <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_b3adc9658bf7a256f066c53f1e08dada411ba031\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\alexi\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\24.2.1\support-annotations-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
-        <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.2.1_daf54cfc5e7cf3ca5f5fa5f37b43e0c846eee1a4\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -129,48 +165,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
-        <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_a417552b5e374a4abb0b073124ca02a92c735e02\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
         sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
         <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_ab10f994b76d083dd18d29e7bc4b970b6ff4fcfb\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
-        <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.2.1_232d44637dd79bad0603f46e00970534dd6e2040\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
-        <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.1_cd08db55b4800c00ef0afd78f0c1e34362ca6663\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
-        <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_eac032d55327feeab31094a24d841a4fc5b285d6\classes.dex" />
     </item>
 
 </items>
