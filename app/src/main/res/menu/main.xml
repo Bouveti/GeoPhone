@@ -6,6 +6,5 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         android:icon="@drawable/fr_fr"
-        app:showAsAction="ifRoom"
-        />
+        app:showAsAction="ifRoom" />
 </menu>
