@@ -15,7 +15,11 @@
         <item>Anglais</item>
     </string-array>
     <string name="title_activity_recherche">RechercheActivity</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="auteur">Alexis Pambourg et Nicolas Bouvet</string>
+    <string name="recent">Récent</string>
+    <string name="mot_de_passe">Mot de passe</string>
+    <string name="title_activity_parametre">ParametreActivity</string>
+    <string name="recherche">Recherche</string>
+    <string name="parametre">Paramètre</string>
+    <string name="title_activity_recent">RecentActivity</string>
 </resources>
