@@ -1,13 +1,19 @@
 package com.example.bouveti.geophone;
 
+import android.Manifest;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.provider.ContactsContract;
+import android.support.v4.app.ActivityCompat;
 import android.util.DisplayMetrics;
-import android.view.View;
+import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,9 +22,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
-
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 public class RechercheActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -38,6 +50,21 @@ public class RechercheActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        int PERMISSION_ALL = 1;
+        String[] PERMISSIONS = {Manifest.permission.READ_CONTACTS,Manifest.permission.WRITE_CONTACTS};
+
+        if (!hasPermissions(this, PERMISSIONS)) {
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        } else if (hasPermissions(this, PERMISSIONS)) {
+            ListView list = (ListView) findViewById(R.id.list_contact);
+            List<String> contacts = retrieveContacts(this.getContentResolver());
+
+            if (contacts != null)
+            {
+                list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, contacts));
+            }
+        }
     }
 
     @Override
@@ -151,5 +178,55 @@ public class RechercheActivity extends AppCompatActivity
         startActivity(refresh);
         overridePendingTransition(0,0);
         finish();
+    }
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private List<String> retrieveContacts(ContentResolver contentResolver)
+    {
+        Set<String> contacts = new HashSet<>();
+        Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, new String[]
+                { ContactsContract.Data.DISPLAY_NAME, ContactsContract.Data._ID, ContactsContract.Contacts.HAS_PHONE_NUMBER }, null, null, null);
+
+        if (cursor == null)
+        {
+            Log.e("retrieveContacts", "Cannot retrieve the contacts");
+            return null;
+        }
+
+        if (cursor.moveToFirst() == true)
+        {
+            do
+            {
+                long id = Long.parseLong(cursor.getString(cursor.getColumnIndex(ContactsContract.Data._ID)));
+                String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
+                int hasPhoneNumber = cursor.getInt(cursor.getColumnIndex(ContactsContract.Data.HAS_PHONE_NUMBER));
+
+                if (hasPhoneNumber > 0)
+                {
+                    contacts.add(name);
+                }
+            }
+            while (cursor.moveToNext() == true);
+        }
+
+        if (cursor.isClosed() == false)
+        {
+            cursor.close();
+        }
+
+        List<String> sortedContacts = new ArrayList<>(contacts);
+        Collections.sort(sortedContacts);
+
+        return sortedContacts;
     }
 }
