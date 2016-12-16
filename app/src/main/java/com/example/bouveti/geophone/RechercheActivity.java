@@ -60,7 +60,8 @@ public class RechercheActivity extends AppCompatActivity
 
         if (!hasPermissions(this, PERMISSIONS)) {
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
-        } else if (hasPermissions(this, PERMISSIONS)) {
+        }
+        if (hasPermissions(this, PERMISSIONS)) {
             ListView list = (ListView) findViewById(R.id.list_contact);
             List<String> contacts = retrieveContacts(this.getContentResolver());
 
@@ -72,14 +73,16 @@ public class RechercheActivity extends AppCompatActivity
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                        String item = adapter.getItem(position);
+                        final String item = adapter.getItem(position);
 
                         new AlertDialog.Builder(RechercheActivity.this)
                                 .setTitle( getString(R.string.button_rechercher) + " " + item + " ?")
                                 .setMessage( getString(R.string.message_recherche_confirm) + " " + item + " ?")
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        startActivity(new Intent(getApplicationContext(), RechercheActivity2.class));
+                                        Intent intent = new Intent(getApplicationContext(), RechercheActivity2.class);
+                                        intent.putExtra("contact", item);
+                                        startActivity(intent);
                                         overridePendingTransition(0,0);
                                         finish();
                                     }

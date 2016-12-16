@@ -14,12 +14,50 @@
     tools:showIn="@layout/app_bar_recherche2">
 
     <TextView
-        android:text="@string/hello_word"
+        android:text="@string/recherche"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_marginStart="117dp"
-        android:layout_marginTop="74dp"
         android:id="@+id/textView3" />
+
+    <Button
+        android:text="Lancer la navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginTop="22dp"
+        android:id="@+id/button"
+        android:onClick="LaunchNavInMaps"/>
+
+    <Button
+        android:text="Passer en navigation rapproché"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button"
+        android:layout_alignStart="@+id/button"
+        android:layout_marginTop="17dp"
+        android:id="@+id/button2" />
+
+    <fragment
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_below="@+id/button2"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="35dp"
+        map:mapType="normal"
+        map:cameraTargetLat="48.851755"
+        map:cameraTargetLng="2.287087"
+        map:cameraZoom="9"
+        map:uiZoomControls="true"
+        map:uiMapToolbar="true"
+        map:uiTiltGestures="true" />
+
 </RelativeLayout>

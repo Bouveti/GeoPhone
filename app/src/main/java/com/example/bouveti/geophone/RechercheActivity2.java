@@ -3,6 +3,7 @@ package com.example.bouveti.geophone;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,11 +19,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.util.Locale;
 
 public class RechercheActivity2 extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
+    String contact;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +47,20 @@ public class RechercheActivity2 extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                contact = null;
+            } else {
+                contact = extras.getString("contact");
+            }
+        } else {
+            contact = (String) savedInstanceState.getSerializable("contact");
+        }
+        SupportMapFragment map = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        map.getMapAsync(this);
+
     }
 
     @Override
@@ -151,5 +174,31 @@ public class RechercheActivity2 extends AppCompatActivity
         startActivity(refresh);
         overridePendingTransition(0,0);
         finish();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        MarkerOptions marker = new MarkerOptions();
+        marker.position(new LatLng(48.851755, 2.287087));
+        marker.title("Position de "+ contact);
+        googleMap.setOnMarkerClickListener(this);
+        googleMap.addMarker(marker);
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        if (("Position de "+ contact).equals(marker.getTitle()))
+        {
+            Toast.makeText(this.getApplicationContext(), "Position de "+ contact, Toast.LENGTH_LONG).show();
+        }
+        return true;
+    }
+
+    public void LaunchNavInMaps(View v){
+        Uri gmmIntentUri = Uri.parse("google.navigation:q=48.851755, 3.287087");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
     }
 }
