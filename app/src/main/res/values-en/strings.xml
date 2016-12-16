@@ -22,4 +22,7 @@
     <string name="title_activity_parametre">ParametreActivity</string>
     <string name="title_activity_password">PasswordActivity</string>
     <string name="title_activity_recent">RecentActivity</string>
+    <string name="message_recherche_confirm">His phone will ring. Are you sure you want to search</string>
+    <string name="title_activity_recherche2">RechercheActivity2</string>
+    <string name="change_lang">Change of language for English</string>
 </resources>

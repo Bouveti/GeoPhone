@@ -83,24 +83,24 @@ public class RecentActivity extends AppCompatActivity
 
             if(lang.equals("en_US"))
             {
+                setLocale(Locale.FRANCE);
                 Toast.makeText(RecentActivity.this,
-                        "Changement de langue pour le Français", Toast.LENGTH_SHORT)
+                        getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.fr_fr);
-                setLocale(Locale.FRANCE);
             } else if (lang.equals("fr_FR"))
             {
+                setLocale(Locale.US);
                 Toast.makeText(RecentActivity.this,
-                        "Change of language for English", Toast.LENGTH_SHORT)
+                        getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.en_us);
-                setLocale(Locale.US);
             } else {
+                setLocale(Locale.FRANCE);
                 Toast.makeText(RecentActivity.this,
-                        "Changement de langue pour le Français", Toast.LENGTH_SHORT)
+                        getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.fr_fr);
-                setLocale(Locale.FRANCE);
             }
             return true;
         }
