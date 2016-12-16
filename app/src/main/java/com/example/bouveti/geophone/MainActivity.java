@@ -125,11 +125,19 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_recent) {
+        if (id == R.id.nav_home ) {
+            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            overridePendingTransition(0,0);
+            finish();
+        }
+        else if (id == R.id.nav_recent) {
             startActivity(new Intent(getApplicationContext(),RecentActivity.class));
             overridePendingTransition(0,0);
             finish();
         } else if (id == R.id.nav_mot_de_passe) {
+            startActivity(new Intent(getApplicationContext(),PasswordActivity.class));
+            overridePendingTransition(0,0);
+            finish();
 
         } else if (id == R.id.nav_parametre) {
             startActivity(new Intent(getApplicationContext(),ParametreActivity.class));

@@ -4,7 +4,6 @@
     <string name="navigation_drawer_close">Fermer la naviguation tiroir</string>
     <string name="action_settings">Paramètres</string>
     <string name="hello_word">Bonjour</string>
-    <string name="nom_app">Géophone</string>
     <string name="button_associer">Associer</string>
     <string name="button_rechercher">Rechercher</string>
     <string name="button_rechercher_par_mdp">Rechercher par mot de passe</string>
@@ -20,6 +19,7 @@
     <string name="mot_de_passe">Mot de passe</string>
     <string name="title_activity_parametre">ParametreActivity</string>
     <string name="recherche">Recherche</string>
-    <string name="parametre">Paramètre</string>
     <string name="title_activity_recent">RecentActivity</string>
+    <string name="title_activity_password">PasswordActivity</string>
+    <string name="home">Accueil</string>
 </resources>
