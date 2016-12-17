@@ -28,12 +28,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class RechercheActivity extends AppCompatActivity
@@ -56,7 +60,8 @@ public class RechercheActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         int PERMISSION_ALL = 1;
-        String[] PERMISSIONS = {Manifest.permission.READ_CONTACTS,Manifest.permission.WRITE_CONTACTS};
+        String[] PERMISSIONS = {Manifest.permission.READ_CONTACTS,Manifest.permission.WRITE_CONTACTS, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
+        , Manifest.permission.READ_SMS, Manifest.permission.SEND_SMS, Manifest.permission.RECEIVE_SMS};
 
         if (!hasPermissions(this, PERMISSIONS)) {
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
@@ -80,6 +85,8 @@ public class RechercheActivity extends AppCompatActivity
                                 .setMessage( getString(R.string.message_recherche_confirm) + " " + item + " ?")
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
+
+                                        //sendPositionBySMS(item);
                                         Intent intent = new Intent(getApplicationContext(), RechercheActivity2.class);
                                         intent.putExtra("contact", item);
                                         startActivity(intent);
@@ -242,8 +249,8 @@ public class RechercheActivity extends AppCompatActivity
             {
                 long id = Long.parseLong(cursor.getString(cursor.getColumnIndex(ContactsContract.Data._ID)));
                 String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
-                int hasPhoneNumber = cursor.getInt(cursor.getColumnIndex(ContactsContract.Data.HAS_PHONE_NUMBER));
 
+                int hasPhoneNumber = cursor.getInt(cursor.getColumnIndex(ContactsContract.Data.HAS_PHONE_NUMBER));
                 if (hasPhoneNumber > 0)
                 {
                     contacts.add(name);
@@ -251,15 +258,18 @@ public class RechercheActivity extends AppCompatActivity
             }
             while (cursor.moveToNext() == true);
         }
-
         if (cursor.isClosed() == false)
         {
             cursor.close();
         }
-
         List<String> sortedContacts = new ArrayList<>(contacts);
         Collections.sort(sortedContacts);
-
         return sortedContacts;
+    }
+
+    public void sendPositionBySMS(String item){
+
+        String num;
+        String message;
     }
 }
