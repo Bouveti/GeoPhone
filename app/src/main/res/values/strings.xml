@@ -17,8 +17,8 @@
     <string name="auteur">Alexis Pambourg et Nicolas Bouvet</string>
     <string name="recent">Récent</string>
     <string name="mot_de_passe">Mot de passe</string>
-    <string name ="ancien_mot_de_passe">Ancien mot de passe</string>
-    <string name ="nouveau_mot_de_passe">Nouveau mot de passe</string>
+    <string name="ancien_mot_de_passe">Ancien mot de passe</string>
+    <string name="nouveau_mot_de_passe">Nouveau mot de passe</string>
     <string name="title_activity_parametre">ParametreActivity</string>
     <string name="recherche">Recherche</string>
     <string name="valider">Valider</string>
@@ -33,4 +33,5 @@
     <string name="title_activity_recherche2">RechercheActivity2</string>
     <string name="message_recherche_confirm">Son téléphone va sonner. Êtes-vous sur de vouloir rechercher</string>
     <string name="change_lang">Changement de langue pour le Français</string>
+    <string name="title_activity_recherche_rapprocher">RechercheRapprocherActivity</string>
 </resources>

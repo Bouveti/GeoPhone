@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_recherche_rapprocher"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.bouveti.geophone.RechercheRapprocherActivity"
+    tools:showIn="@layout/app_bar_recherche_rapprocher">
+
+    <TextView
+        android:text="KEK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="67dp"
+        android:id="@+id/textView4" />
+
+    <Button
+        android:text="Trouvé"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/found"
+        android:onClick="Found"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/textView4"
+        android:layout_marginBottom="127dp" />
+
+    <Switch
+        android:text="Faire sonner et vibrer ?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/switch_vibe_sound"
+        android:layout_marginBottom="54dp"
+        android:layout_above="@+id/found"
+        android:layout_centerHorizontal="true" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView4"
+        android:layout_toStartOf="@+id/switch_vibe_sound"
+        android:layout_marginTop="57dp"
+        android:id="@+id/progressBar3" />
+
+</RelativeLayout>

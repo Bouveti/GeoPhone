@@ -199,4 +199,10 @@ public class MapActivity extends AppCompatActivity
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);
     }
+
+    public void toRechercheRapprocher(View v)
+    {
+        Intent intent = new Intent(this , RechercheRapprocherActivity.class);
+        startActivity(intent);
+    }
 }

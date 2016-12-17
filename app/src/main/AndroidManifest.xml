@@ -6,7 +6,6 @@
         android:minSdkVersion="23"
         android:targetSdkVersion="23" />
 
-
     <!-- OpenGL ES V2 -->
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -29,6 +28,12 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
+    <!-- Vibration -->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <!-- Wifi -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -66,16 +71,15 @@
         <activity
             android:name=".MapActivity"
             android:label="@string/title_activity_recherche2"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ForgottenActivity"
             android:label="@string/mot_de_passe_oublié"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".InitialisationActivity"
             android:label="Initialisation"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- Clé API Google Maps v2 -->
         <meta-data
@@ -84,6 +88,11 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".RechercheRapprocherActivity"
+            android:label="@string/title_activity_recherche_rapprocher"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

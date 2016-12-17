@@ -39,7 +39,8 @@
         android:layout_below="@+id/button"
         android:layout_alignStart="@+id/button"
         android:layout_marginTop="17dp"
-        android:id="@+id/button2" />
+        android:id="@+id/button2"
+        android:onClick="toRechercheRapprocher" />
 
     <fragment
         xmlns:android="http://schemas.android.com/apk/res/android"

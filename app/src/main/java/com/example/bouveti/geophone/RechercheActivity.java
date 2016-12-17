@@ -244,42 +244,6 @@ public class RechercheActivity extends AppCompatActivity
         return true;
     }
 
-    private List<String> retrieveContacts(ContentResolver contentResolver)
-    {
-        Set<String> contacts = new HashSet<>();
-        Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, new String[]
-                { ContactsContract.Data.DISPLAY_NAME, ContactsContract.Data._ID, ContactsContract.Contacts.HAS_PHONE_NUMBER }, null, null, null);
-
-        if (cursor == null)
-        {
-            Log.e("retrieveContacts", "Cannot retrieve the contacts");
-            return null;
-        }
-
-        if (cursor.moveToFirst() == true)
-        {
-            do
-            {
-                long id = Long.parseLong(cursor.getString(cursor.getColumnIndex(ContactsContract.Data._ID)));
-                String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
-
-                int hasPhoneNumber = cursor.getInt(cursor.getColumnIndex(ContactsContract.Data.HAS_PHONE_NUMBER));
-                if (hasPhoneNumber > 0)
-                {
-                    contacts.add(name);
-                }
-            }
-            while (cursor.moveToNext() == true);
-        }
-        if (cursor.isClosed() == false)
-        {
-            cursor.close();
-        }
-        List<String> sortedContacts = new ArrayList<>(contacts);
-        Collections.sort(sortedContacts);
-        return sortedContacts;
-    }
-
     public void sendPositionBySMS(String item){
 
         String num;
