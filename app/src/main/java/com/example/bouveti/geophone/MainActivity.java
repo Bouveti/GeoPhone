@@ -161,7 +161,13 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void ToRecherche(View v)
+    public void toRecherche(View v)
+    {
+        /*Intent intent = new Intent(this , RechercheActivity.class);
+        startActivity(intent);*/
+    }
+
+    public void toRechercheByPassword(View v)
     {
         Intent intent = new Intent(this , RechercheActivity.class);
         startActivity(intent);

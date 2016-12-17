@@ -52,7 +52,7 @@ public class RechercheActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open,  R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -99,7 +99,7 @@ public class RechercheActivity extends AppCompatActivity
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     //sendPositionBySMS(item);
-                                    Intent intent = new Intent(getApplicationContext(), RechercheActivity2.class);
+                                    Intent intent = new Intent(getApplicationContext(), MapActivity.class);
                                     intent.putExtra("name", name);
                                     intent.putExtra("number", name);
                                     startActivity(intent);
