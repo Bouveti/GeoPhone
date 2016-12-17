@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -25,23 +26,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 public class RechercheActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public ListView lv;
+    public Cursor cursor1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,43 +67,55 @@ public class RechercheActivity extends AppCompatActivity
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
         }
         if (hasPermissions(this, PERMISSIONS)) {
-            ListView list = (ListView) findViewById(R.id.list_contact);
-            List<String> contacts = retrieveContacts(this.getContentResolver());
 
-            if (contacts != null)
-            {
-                final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, contacts);
-                list.setAdapter(adapter);
-                list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            cursor1 = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
+            startManagingCursor(cursor1);
 
-                        final String item = adapter.getItem(position);
+            String[] from = {ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone._ID};
+            int[] to = { android.R.id.text1, android.R.id.text2 };
 
-                        new AlertDialog.Builder(RechercheActivity.this)
-                                .setTitle( getString(R.string.button_rechercher) + " " + item + " ?")
-                                .setMessage( getString(R.string.message_recherche_confirm) + " " + item + " ?")
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
+            final SimpleCursorAdapter listCursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor1, from, to);
 
-                                        //sendPositionBySMS(item);
-                                        Intent intent = new Intent(getApplicationContext(), RechercheActivity2.class);
-                                        intent.putExtra("contact", item);
-                                        startActivity(intent);
-                                        overridePendingTransition(0,0);
-                                        finish();
-                                    }
-                                })
-                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
 
-                                    }
-                                })
-                                .setIcon(android.R.drawable.ic_menu_search)
-                                .show();
-                    }
-                });
-            }
+            lv = (ListView)findViewById(android.R.id.list);
+            lv.setAdapter(listCursorAdapter);
+
+            lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Adapter adapter = parent.getAdapter();
+                    SimpleCursorAdapter simpleCursorAdapter = (SimpleCursorAdapter)adapter;
+                    Cursor cursor = (Cursor)simpleCursorAdapter.getItem(position);
+
+                    final String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                    final String number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+
+
+                    new AlertDialog.Builder(RechercheActivity.this)
+                            .setTitle(getString(R.string.button_rechercher) + " " + name + " ?")
+                            .setMessage(getString(R.string.message_recherche_confirm) + " " + name + " (" + number + " )"+ " ?")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //sendPositionBySMS(item);
+                                    Intent intent = new Intent(getApplicationContext(), RechercheActivity2.class);
+                                    intent.putExtra("name", name);
+                                    intent.putExtra("number", name);
+                                    startActivity(intent);
+                                    overridePendingTransition(0, 0);
+                                    finish();
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_menu_search)
+                            .show();
+                }
+            });
         }
     }
 
