@@ -34,10 +34,13 @@ public class PasswordActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Récupération du layout de l'activité
         setContentView(R.layout.activity_password);
+        //Mise en place de la barre d'action
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Mise en place du sideMenu
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -48,6 +51,7 @@ public class PasswordActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    //Appel lors de l'utilisation du bouton retour
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -66,6 +70,7 @@ public class PasswordActivity extends AppCompatActivity
         String lang = getResources().getConfiguration().locale.toString();
         MenuItem lang_item = menu.findItem(R.id.lang_setting);
 
+        //Initialisation de la langue utilisée
         if(lang.equals("en_US"))
         {
             lang_item.setIcon(R.drawable.en_us);
@@ -78,6 +83,7 @@ public class PasswordActivity extends AppCompatActivity
         return true;
     }
 
+    //Méthode de changement de langue
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -116,6 +122,7 @@ public class PasswordActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //Méthode de sélection des items du sideMenu
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -147,20 +154,27 @@ public class PasswordActivity extends AppCompatActivity
         return true;
     }
 
+    //Méthode de modification du mot de passe enregistré
     public void changePassword(View v){
 
+        //Récupération des éléments graphiques
         EditText oldPassSub = (EditText) findViewById(R.id.enterPassword);
         EditText newPassSub =  (EditText) findViewById(R.id.enterNewPassword);
 
+        //Récupération des entrées utilisateurs
         String password = oldPassSub.getText().toString();
         String newPassword = newPassSub.getText().toString();
 
+        //Récupération du mot de passe actuel
         SharedPreferences config = getSharedPreferences("credentials",0);
         SharedPreferences.Editor editor = config.edit();
 
+        //Si l'utilisateur a le bon mot de passe
         if(password.equals(config.getString("password",null))){
+            //Modification du mot de passe
             editor.putString("password", newPassword);
             editor.apply();
+            //Pop up de confirmation du changement
             Toast.makeText(PasswordActivity.this,
                     getString(R.string.mot_de_passe_changé), Toast.LENGTH_SHORT)
                     .show();
@@ -168,18 +182,21 @@ public class PasswordActivity extends AppCompatActivity
             newPassSub.setText("");
 
         }else {
+            //Sinon pop up d'erreur
             Toast.makeText(PasswordActivity.this,
                     getString(R.string.mauvais_mot_de_passe), Toast.LENGTH_SHORT)
                     .show();
         }
     }
 
+    //Méthode de transition vers l'activité "Mot de passe oublié"
     public void toForgotten(View v)
     {
         Intent intent = new Intent(this , ForgottenActivity.class);
         startActivity(intent);
     }
 
+    //Rafraichissement de l'activité au changement de langue
     public void setLocale(Locale lang)
     {
         Resources res = getResources();

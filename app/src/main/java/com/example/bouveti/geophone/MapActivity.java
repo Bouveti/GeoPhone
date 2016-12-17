@@ -40,10 +40,14 @@ public class MapActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Récupération du layout de l'activité
         setContentView(R.layout.activity_map);
+        //Mise en place de la barre d'action
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Mise en place du sideMenu
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -53,6 +57,7 @@ public class MapActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //Récupération des paramètres de l'activité précédente
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
@@ -70,6 +75,7 @@ public class MapActivity extends AppCompatActivity
         map.getMapAsync(this);
     }
 
+    //Appel lors de l'utilisation du bouton retour
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -85,6 +91,7 @@ public class MapActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
 
+        //Initialisation de la langue utilisée
         String lang = getResources().getConfiguration().locale.toString();
         MenuItem lang_item = menu.findItem(R.id.lang_setting);
 
@@ -100,6 +107,7 @@ public class MapActivity extends AppCompatActivity
         return true;
     }
 
+    //Méthode de changement de langue
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -138,6 +146,7 @@ public class MapActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //Méthode de sélection des items du sideMenu
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -170,6 +179,7 @@ public class MapActivity extends AppCompatActivity
         return true;
     }
 
+    //Rafraichissement de l'activité au changement de langue
     public void setLocale(Locale lang)
     {
         Resources res = getResources();
@@ -183,6 +193,7 @@ public class MapActivity extends AppCompatActivity
         finish();
     }
 
+    //Méthode d'initialisation de la carte
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
@@ -196,6 +207,7 @@ public class MapActivity extends AppCompatActivity
         googleMap.addMarker(marker);
     }
 
+    //Méthode de message sur clique du marker
     @Override
     public boolean onMarkerClick(Marker marker) {
         if (("Position de "+ phoneNumber).equals(marker.getTitle()))
@@ -205,6 +217,7 @@ public class MapActivity extends AppCompatActivity
         return true;
     }
 
+    //Méthode de lancement de la navigation sur googleMap
     public void LaunchNavInMaps(View v){
         Uri gmmIntentUri = Uri.parse("google.navigation:q="+this.latitude+", "+this.longitude);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
@@ -212,7 +225,8 @@ public class MapActivity extends AppCompatActivity
         startActivity(mapIntent);
     }
 
-    public void toRechercheRapprocher(View v)
+    //Méthode de transition vers l'activité de guidage rapproché
+    public void toRechercheRapprochee(View v)
     {
         Intent intent = new Intent(this , RechercheRapprocherActivity.class);
         startActivity(intent);

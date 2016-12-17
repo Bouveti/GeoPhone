@@ -51,18 +51,24 @@ public class RechercheActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Récupération du layout de l'activité
         setContentView(R.layout.activity_recherche);
+        //Mise en place de la barre d'action
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Vérification de la présence de paramètre
         Bundle extra = getIntent().getExtras();
+        //Si un paramètre "Failed existe"
         if(extra != null)if(extra.getBoolean("failed")){
+            //Message d'erreur
             Toast.makeText(RechercheActivity.this,
                     getString(R.string.mauvais_mot_de_passe), Toast.LENGTH_SHORT)
                     .show();
             finish();
         }
 
+        //Mise en place du sideMenu
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open,  R.string.navigation_drawer_close);
@@ -72,6 +78,7 @@ public class RechercheActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //Demande des permissions requises
         int PERMISSION_ALL = 1;
         String[] PERMISSIONS = {Manifest.permission.READ_CONTACTS,Manifest.permission.WRITE_CONTACTS, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
         , Manifest.permission.READ_SMS, Manifest.permission.SEND_SMS, Manifest.permission.RECEIVE_SMS};
@@ -105,6 +112,7 @@ public class RechercheActivity extends AppCompatActivity
         }
     }
 
+    //Appel lors de l'utilisation du bouton retour
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -123,6 +131,7 @@ public class RechercheActivity extends AppCompatActivity
         String lang = getResources().getConfiguration().locale.toString();
         MenuItem lang_item = menu.findItem(R.id.lang_setting);
 
+        //Initialisation de la langue utilisée
         if(lang.equals("en_US"))
         {
             lang_item.setIcon(R.drawable.en_us);
@@ -135,6 +144,7 @@ public class RechercheActivity extends AppCompatActivity
         return true;
     }
 
+    //Méthode de changement de langue
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -173,6 +183,7 @@ public class RechercheActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //Méthode de sélection des items du sideMenu
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -205,18 +216,23 @@ public class RechercheActivity extends AppCompatActivity
         return true;
     }
 
+    //Méthode de recherche pour un numéro inconny
     public void rechercheSansContact(View v){
         search(false, null, v ,0 ,0);
     }
 
+    //Méthode de recherche d'un numéro
     public void search(boolean isKnown, AdapterView<?> parent,View view, int position, long id  ){
 
+        //Récupération des éléments graphiques
         EditText recherche = (EditText) findViewById(R.id.recherche_sans_contact);
 
         final String name ;
         final String number;
 
+        //Si le numéro est un contact
         if(isKnown){
+            //Récupération des informations du contact
             Adapter adapter = parent.getAdapter();
             SimpleCursorAdapter simpleCursorAdapter = (SimpleCursorAdapter)adapter;
             Cursor cursor = (Cursor)simpleCursorAdapter.getItem(position);
@@ -226,10 +242,12 @@ public class RechercheActivity extends AppCompatActivity
 
         }else{
 
+            //Sinon, récupération du numéro entré
             name = getString(R.string.ce_num);
             number = recherche.getText().toString();
         }
 
+        //Mise en place d'un popup demandant confirmation et mot de passe
         final EditText input = new EditText(RechercheActivity.this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -258,6 +276,7 @@ public class RechercheActivity extends AppCompatActivity
 
     }
 
+    //Rafraichissement de l'activité au changement de langue
     public void setLocale(Locale lang)
     {
         Resources res = getResources();
@@ -281,7 +300,8 @@ public class RechercheActivity extends AppCompatActivity
         }
         return true;
     }
-	
+
+    //Méthode d'envois de la requête de position
     public void sendPositionBySMS(String password, String number){
 
         String message = "GEOPHONE//LOCATIONREQUEST//PASSWORD:"+password;

@@ -43,8 +43,11 @@ public class InitialisationActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Récupération du layout de l'activité
         setContentView(R.layout.activity_initialisation);
 
+        //Mise en place de la barre d'action
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -52,6 +55,7 @@ public class InitialisationActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    //Appel lors de l'utilisation du bouton retour
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Exit")
@@ -70,6 +74,8 @@ public class InitialisationActivity extends AppCompatActivity
         return false;
     }
 
+
+    //Méthode de changement de langue
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -108,6 +114,8 @@ public class InitialisationActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
+    //Méthode de sélection des items du sideMenu
    @SuppressWarnings("StatementWithEmptyBody")
    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -115,16 +123,20 @@ public class InitialisationActivity extends AppCompatActivity
         return true;
     }
 
+    //Méthode de récupération des entrées utilisateurs
     public void submit(View v){
 
         EditText passwordSub, answerSub;
 
+        //Récupération des éléments graphiques
         passwordSub = (EditText) findViewById(R.id.enterPassword);
         answerSub = (EditText) findViewById(R.id.enter_secrete_answer);
 
+        //Récupération du mot de passe et de la réponse secrète
         String password = passwordSub.getText().toString();
         String answer = answerSub.getText().toString();
 
+        //Enregistrement dans les SharedPreferences
         SharedPreferences config = getSharedPreferences("credentials",0);
         SharedPreferences.Editor editor = config.edit();
 
@@ -137,6 +149,7 @@ public class InitialisationActivity extends AppCompatActivity
     }
 
 
+    //Rafraichissement de l'activité au changement de langue
     public void setLocale(Locale lang)
     {
         Resources res = getResources();
