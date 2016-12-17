@@ -2,15 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bouveti.geophone">
 
-    <uses-sdk android:minSdkVersion="23" android:targetSdkVersion="23"/>
+    <uses-sdk
+        android:minSdkVersion="23"
+        android:targetSdkVersion="23" />
 
-    <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_CONTACTS"></uses-permission>
 
-    <!-- Permission permettant de vérifier l'état de la connexion -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- Permission pour stocker des données en cache de la map -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- OpenGL ES V2 -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <!-- Repertoire -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+
+    <!-- Maps -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -25,6 +34,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -43,6 +53,10 @@
         <activity
             android:name=".PasswordActivity"
             android:label="@string/mot_de_passe"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RechercheActivity2"
+            android:label="@string/title_activity_recherche2"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ForgottenActivity"
@@ -52,6 +66,15 @@
             android:name=".InitialisationActivity"
             android:label="Initialisation"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+
+        <!-- Clé API Google Maps v2 -->
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyC_is1Eb3G15VJzsRL1WRoUepasLhvrLbo" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

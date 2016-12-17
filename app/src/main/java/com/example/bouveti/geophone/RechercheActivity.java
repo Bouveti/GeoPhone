@@ -3,6 +3,7 @@ package com.example.bouveti.geophone;
 import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -12,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.support.design.widget.NavigationView;
@@ -22,6 +24,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -56,13 +60,42 @@ public class RechercheActivity extends AppCompatActivity
 
         if (!hasPermissions(this, PERMISSIONS)) {
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
-        } else if (hasPermissions(this, PERMISSIONS)) {
+        }
+        if (hasPermissions(this, PERMISSIONS)) {
             ListView list = (ListView) findViewById(R.id.list_contact);
             List<String> contacts = retrieveContacts(this.getContentResolver());
 
             if (contacts != null)
             {
-                list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, contacts));
+                final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, contacts);
+                list.setAdapter(adapter);
+                list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                        final String item = adapter.getItem(position);
+
+                        new AlertDialog.Builder(RechercheActivity.this)
+                                .setTitle( getString(R.string.button_rechercher) + " " + item + " ?")
+                                .setMessage( getString(R.string.message_recherche_confirm) + " " + item + " ?")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(getApplicationContext(), RechercheActivity2.class);
+                                        intent.putExtra("contact", item);
+                                        startActivity(intent);
+                                        overridePendingTransition(0,0);
+                                        finish();
+                                    }
+                                })
+                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                .setIcon(android.R.drawable.ic_menu_search)
+                                .show();
+                    }
+                });
             }
         }
     }
@@ -110,24 +143,24 @@ public class RechercheActivity extends AppCompatActivity
 
             if(lang.equals("en_US"))
             {
+                setLocale(Locale.FRANCE);
                 Toast.makeText(RechercheActivity.this,
-                        "Changement de langue pour le Français", Toast.LENGTH_SHORT)
+                        getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.fr_fr);
-                setLocale(Locale.FRANCE);
             } else if (lang.equals("fr_FR"))
             {
+                setLocale(Locale.US);
                 Toast.makeText(RechercheActivity.this,
-                        "Change of language for English", Toast.LENGTH_SHORT)
+                        getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.en_us);
-                setLocale(Locale.US);
             } else {
+                setLocale(Locale.FRANCE);
                 Toast.makeText(RechercheActivity.this,
-                        "Changement de langue pour le Français", Toast.LENGTH_SHORT)
+                        getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.fr_fr);
-                setLocale(Locale.FRANCE);
             }
             return true;
         }
