@@ -5,7 +5,9 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,9 +19,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -55,14 +59,8 @@ public class MapActivity extends AppCompatActivity
                 phoneNumber = null;
             } else {
                 phoneNumber = extras.getString("number");
-                latitude = Double.parseDouble(extras.getString("latitude"));
-                longitude = Double.parseDouble(extras.getString("longitude"));
-
-                Bundle args = new Bundle();
-                args.putDouble("latitude", latitude);
-                args.putDouble("longitude", longitude);
-
-                getFragmentManager().findFragmentById(R.id.map).setArguments(args);
+                this.latitude = extras.getDouble("lat");
+                this.longitude = extras.getDouble("long");
 
             }
         } else {
@@ -70,7 +68,6 @@ public class MapActivity extends AppCompatActivity
         }
         SupportMapFragment map = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         map.getMapAsync(this);
-
     }
 
     @Override
@@ -190,8 +187,11 @@ public class MapActivity extends AppCompatActivity
     public void onMapReady(GoogleMap googleMap) {
 
         MarkerOptions marker = new MarkerOptions();
-        marker.position(new LatLng(48.851755, 2.287087));
+        marker.position(new LatLng(this.latitude, this.longitude));
         marker.title("Position de "+ phoneNumber);
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(this.latitude, this.longitude), 9));
+
         googleMap.setOnMarkerClickListener(this);
         googleMap.addMarker(marker);
     }
@@ -206,7 +206,7 @@ public class MapActivity extends AppCompatActivity
     }
 
     public void LaunchNavInMaps(View v){
-        Uri gmmIntentUri = Uri.parse("google.navigation:q=48.851755, 3.287087");
+        Uri gmmIntentUri = Uri.parse("google.navigation:q="+this.latitude+", "+this.longitude);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);

@@ -74,11 +74,11 @@ public class SmsReader extends BroadcastReceiver{
             this.sendResponse(context, messageBody);
 
         }else if(messageBody.contains("WRONG_PASSWORD")){
-            this.denyLocation();
+            this.denyLocation(context);
         }else{
 
-            String longitudeReceived = messageBody.substring(messageBody.lastIndexOf("="));
-            String latitudeReceived = messageBody.substring(15,messageBody.lastIndexOf("/"));
+            Double longitudeReceived = Double.parseDouble(messageBody.substring(messageBody.lastIndexOf("=")+1));
+            Double latitudeReceived = Double.parseDouble(messageBody.substring(44,messageBody.lastIndexOf("/")));
 
             this.toMap(context, latitudeReceived, longitudeReceived);
         }
@@ -105,15 +105,23 @@ public class SmsReader extends BroadcastReceiver{
 
     }
 
-    public void denyLocation(){
+    public void denyLocation(Context context){
+
+        Intent intent = new Intent(context.getApplicationContext(), RechercheActivity.class);
+        intent.putExtra("failed", true);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
 
     }
 
-    public void toMap(Context context, String latitude, String longitude){
+    public void toMap(Context context, Double latitude, Double longitude){
         Intent intent = new Intent(context.getApplicationContext(), MapActivity.class);
+
         intent.putExtra("lat", latitude);
         intent.putExtra("long", longitude);
         intent.putExtra("number",phoneNumber);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
         context.startActivity(intent);
     }
 

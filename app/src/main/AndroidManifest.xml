@@ -70,7 +70,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MapActivity"
-            android:label="@string/title_activity_recherche2"
+            android:label="@string/title_activity_map"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ForgottenActivity"

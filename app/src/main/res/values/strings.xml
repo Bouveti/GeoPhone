@@ -6,6 +6,7 @@
     <string name="hello_word">Bonjour</string>
     <string name="button_associer">Associer</string>
     <string name="button_rechercher">Rechercher</string>
+    <string name="ce_num">Ce numéro</string>
     <string name="button_rechercher_par_mdp">Rechercher par mot de passe</string>
     <string name="change_language">Changer de langue ?</string>
     <string-array name="languages">
@@ -21,6 +22,7 @@
     <string name="nouveau_mot_de_passe">Nouveau mot de passe</string>
     <string name="title_activity_parametre">ParametreActivity</string>
     <string name="recherche">Recherche</string>
+    <string name="recherche_sans_contact">Recherche sans contact</string>
     <string name="valider">Valider</string>
     <string name="mot_de_passe_oublié">Mot de passe oublié</string>
     <string name="question_secrete">Quel est le nom de jeune fille de votre mère ?</string>
@@ -32,7 +34,7 @@
     <string name="title_activity_recent">RecentActivity</string>
     <string name="title_activity_password">PasswordActivity</string>
     <string name="home">Accueil</string>
-    <string name="title_activity_recherche2">RechercheActivity2</string>
+    <string name="title_activity_map">Carte</string>
     <string name="message_recherche_confirm">Son téléphone va sonner. Êtes-vous sur de vouloir rechercher</string>
     <string name="change_lang">Changement de langue pour le Français</string>
     <string name="title_activity_recherche_rapprocher">RechercheRapprocherActivity</string>

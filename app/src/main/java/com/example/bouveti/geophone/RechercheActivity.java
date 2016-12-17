@@ -55,6 +55,14 @@ public class RechercheActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Bundle extra = getIntent().getExtras();
+        if(extra != null)if(extra.getBoolean("failed")){
+            Toast.makeText(RechercheActivity.this,
+                    getString(R.string.mauvais_mot_de_passe), Toast.LENGTH_SHORT)
+                    .show();
+            finish();
+        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open,  R.string.navigation_drawer_close);
@@ -91,39 +99,8 @@ public class RechercheActivity extends AppCompatActivity
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Adapter adapter = parent.getAdapter();
-                    SimpleCursorAdapter simpleCursorAdapter = (SimpleCursorAdapter)adapter;
-                    Cursor cursor = (Cursor)simpleCursorAdapter.getItem(position);
-
-                    final String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-                    final String number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-
-                    final EditText input = new EditText(RechercheActivity.this);
-                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.MATCH_PARENT);
-                    input.setLayoutParams(lp);
-                    input.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-
-                    new AlertDialog.Builder(RechercheActivity.this)
-                            .setTitle(getString(R.string.button_rechercher) + " " + name + " ?")
-                            .setMessage(getString(R.string.message_recherche_confirm) + " " + name + " (" + number + " )"+ " ?\n\n"+getString(R.string.mot_de_passe))
-                            .setView(input)
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    String password = input.getText().toString();
-
-                                    sendPositionBySMS(password, number);
-                                }
-                            })
-                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            })
-                            .setIcon(android.R.drawable.ic_menu_search)
-                            .show();
-                }
+                    search(true, parent, view, position, id);
+                        }
             });
         }
     }
@@ -226,6 +203,59 @@ public class RechercheActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void rechercheSansContact(View v){
+        search(false, null, v ,0 ,0);
+    }
+
+    public void search(boolean isKnown, AdapterView<?> parent,View view, int position, long id  ){
+
+        EditText recherche = (EditText) findViewById(R.id.recherche_sans_contact);
+
+        final String name ;
+        final String number;
+
+        if(isKnown){
+            Adapter adapter = parent.getAdapter();
+            SimpleCursorAdapter simpleCursorAdapter = (SimpleCursorAdapter)adapter;
+            Cursor cursor = (Cursor)simpleCursorAdapter.getItem(position);
+
+            name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+            number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+
+        }else{
+
+            name = getString(R.string.ce_num);
+            number = recherche.getText().toString();
+        }
+
+        final EditText input = new EditText(RechercheActivity.this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(lp);
+        input.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+
+        new AlertDialog.Builder(RechercheActivity.this)
+                .setTitle(getString(R.string.button_rechercher) + " " + name + " ?")
+                .setMessage(getString(R.string.message_recherche_confirm) + " " + name + " (" + number + " )"+ " ?\n\n"+getString(R.string.mot_de_passe))
+                .setView(input)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String password = input.getText().toString();
+
+                        sendPositionBySMS(password, number);
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setIcon(android.R.drawable.ic_menu_search)
+                .show();
+
     }
 
     public void setLocale(Locale lang)

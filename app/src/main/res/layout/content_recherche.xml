@@ -13,23 +13,34 @@
     tools:context="com.example.bouveti.geophone.RechercheActivity"
     tools:showIn="@layout/app_bar_recherche">
 
-    <TextView
-        android:text="@string/recherche"
+    <EditText
+        android:text="@string/recherche_sans_contact"
+        android:inputType="number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="112dp"
-        android:id="@+id/title_recherche" />
+        android:layout_marginStart="0dp"
+        android:id="@+id/recherche_sans_contact" />
 
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/title_recherche"
+        android:layout_below="@+id/recherche_sans_contact"
         android:layout_alignParentStart="true"
         android:layout_marginStart="14dp"
         android:layout_marginTop="31dp" />
+
+    <Button
+        android:text="@string/recherche"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:id="@+id/validate"
+        android:layout_above="@+id/listView"
+        android:layout_toEndOf="@+id/recherche_sans_contact"
+        android:onClick="rechercheSansContact"/>
 
 
 </RelativeLayout>

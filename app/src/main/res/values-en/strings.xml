@@ -6,6 +6,7 @@
     <string name="hello_word">Hello</string>
     <string name="button_associer">Associate</string>
     <string name="button_rechercher">Search</string>
+    <string name="ce_num">This number</string>
     <string name="button_rechercher_par_mdp">Search by password</string>
     <string name="change_language">Change language ?</string>
     <string-array name="languages">
@@ -20,6 +21,7 @@
     <string name ="ancien_mot_de_passe">Previous Password</string>
     <string name ="nouveau_mot_de_passe">New Password</string>
     <string name="recherche">Research</string>
+    <string name="recherche_sans_contact">Search witout contact</string>
     <string name="valider">Submit</string>
     <string name="mot_de_passe_oublié">Forgotten Password</string>
     <string name="question_secrete">What is your mother\'s maiden name ?</string>
@@ -33,6 +35,6 @@
     <string name="title_activity_password">PasswordActivity</string>
     <string name="title_activity_recent">RecentActivity</string>
     <string name="message_recherche_confirm">His phone will ring. Are you sure you want to search</string>
-    <string name="title_activity_recherche2">RechercheActivity2</string>
+    <string name="title_activity_map">Map</string>
     <string name="change_lang">Change of language for English</string>
 </resources>
