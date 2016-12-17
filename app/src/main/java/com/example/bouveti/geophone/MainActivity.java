@@ -46,11 +46,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Récupération du layout de l'activité
         setContentView(R.layout.activity_main);
 
+        //Mise en place de la barre d'action
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Mise en place du sideMenu
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -60,13 +64,16 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //Vérification de la présence de mot de passe sauvegardé
         SharedPreferences config = getSharedPreferences("credentials",0);
 
+        //Si non défini, redirection vers l'activité d'initialisation
         if(!config.contains("password")){
             this.toInitialisation();
 
         }
 
+        //Demande des permissions pour l'application
         int PERMISSION_ALL = 1;
         String[] PERMISSIONS = {Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
                 , Manifest.permission.READ_SMS, Manifest.permission.SEND_SMS, Manifest.permission.RECEIVE_SMS, Manifest.permission.VIBRATE, Manifest.permission.ACCESS_WIFI_STATE};
@@ -76,6 +83,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    //Appel lors de l'utilisation du bouton retour
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -91,6 +99,7 @@ public class MainActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
 
+        //Initialisation de la langue utilisée
         String lang = getResources().getConfiguration().locale.toString();
         MenuItem lang_item = menu.findItem(R.id.lang_setting);
 
@@ -106,6 +115,8 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+
+    //Méthode de changement de langue
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -144,6 +155,8 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
+    //Méthode de sélection des items du sideMenu
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -181,12 +194,14 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);*/
     }
 
+    //Méthode de transition vers l'activité "Recherche par mot de passe"
     public void toRechercheByPassword(View v)
     {
         Intent intent = new Intent(this , RechercheActivity.class);
         startActivity(intent);
     }
 
+    //Méthode de transition vers l'activité d'initialisation
     public void toInitialisation(){
 
         Intent intent = new Intent(this, InitialisationActivity.class);
@@ -194,6 +209,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    //Rafraichissement de l'activité au changement de langue
     public void setLocale(Locale lang)
     {
         Resources res = getResources();
@@ -207,6 +223,7 @@ public class MainActivity extends AppCompatActivity
         finish();
     }
 
+    //Méthode de vérification des permissions requises
     public static boolean hasPermissions(Context context, String... permissions) {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
             for (String permission : permissions) {

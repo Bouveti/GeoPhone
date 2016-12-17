@@ -34,10 +34,13 @@ public class RechercheRapprocherActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Récupération du layout de l'activité
         setContentView(R.layout.activity_recherche_rapprocher);
+        //Mise en place de la barre d'action
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Mise en place du sideMenu
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -115,6 +118,7 @@ public class RechercheRapprocherActivity extends AppCompatActivity
 
     }
 
+    //Appel lors de l'utilisation du bouton retour
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -133,6 +137,7 @@ public class RechercheRapprocherActivity extends AppCompatActivity
         String lang = getResources().getConfiguration().locale.toString();
         MenuItem lang_item = menu.findItem(R.id.lang_setting);
 
+        //Initialisation de la langue utilisée
         if(lang.equals("en_US"))
         {
             lang_item.setIcon(R.drawable.en_us);
@@ -145,6 +150,7 @@ public class RechercheRapprocherActivity extends AppCompatActivity
         return true;
     }
 
+    //Méthode de changement de langue
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -215,6 +221,7 @@ public class RechercheRapprocherActivity extends AppCompatActivity
         return true;
     }
 
+    //Rafraichissement de l'activité au changement de langue
     public void setLocale(Locale lang)
     {
         Resources res = getResources();

@@ -31,10 +31,14 @@ public class ForgottenActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Récupération du layout de l'activité
         setContentView(R.layout.activity_forgotten);
+        //Mise en place de la barre d'action
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Mise en place du sideMenu
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -45,6 +49,7 @@ public class ForgottenActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    //Appel lors de l'utilisation du bouton retour
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -60,6 +65,7 @@ public class ForgottenActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
 
+        //Initialisation de la langue utilisée
         String lang = getResources().getConfiguration().locale.toString();
         MenuItem lang_item = menu.findItem(R.id.lang_setting);
 
@@ -75,6 +81,7 @@ public class ForgottenActivity extends AppCompatActivity
         return true;
     }
 
+    //Méthode de changement de langue
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -82,7 +89,6 @@ public class ForgottenActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.lang_setting) {
             String lang = getResources().getConfiguration().locale.toString();
 
@@ -113,26 +119,31 @@ public class ForgottenActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //Méthode de sélection des items du sideMenu
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_home ) {
+            //Lancement de l'activité d'accueil
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             overridePendingTransition(0,0);
             finish();
         }
         else if (id == R.id.nav_recent) {
+            //Lancement de l'activité "Récent"
             startActivity(new Intent(getApplicationContext(),RecentActivity.class));
             overridePendingTransition(0,0);
             finish();
 
+            //Lancement de l'activité "Mot de passe"
         } else if (id == R.id.nav_mot_de_passe) {
             startActivity(new Intent(getApplicationContext(), com.example.bouveti.geophone.PasswordActivity.class));
             overridePendingTransition(0,0);
             finish();
 
+            //Lancement de l'activité "Paramètres"
         } else if (id == R.id.nav_parametre) {
             startActivity(new Intent(getApplicationContext(),ParametreActivity.class));
             overridePendingTransition(0,0);
@@ -144,18 +155,24 @@ public class ForgottenActivity extends AppCompatActivity
         return true;
     }
 
+    //Méthode de vérification de la réponse à la question et affichage du mot de passe
     public void showPassword(View v){
 
+        //Récupération des éléments graphiques
         EditText answerSub = (EditText) findViewById(R.id.enter_secrete_answer);
         TextView showPassword = (TextView) findViewById(R.id.reveal_password);
         String answer = answerSub.getText().toString();
 
+        //Récupération de la bonne réponse
         SharedPreferences config = getSharedPreferences("credentials",0);
 
+        //Si la réponse entrée correspond à la réponse stockée en mémoire
         if(config.getString("answer",null).equals(answer)){
+            //Affichage du mot de passe
             showPassword.setText(showPassword.getText().toString()+config.getString("password",null));
             answerSub.setText("");
         }else{
+            //Sinon, message d'erreur
             Toast.makeText(ForgottenActivity.this,
                     "Mauvaise réponse", Toast.LENGTH_SHORT)
                     .show();
@@ -163,6 +180,7 @@ public class ForgottenActivity extends AppCompatActivity
 
     }
 
+    //Rafraichissement de l'activité au changement de langue
     public void setLocale(Locale lang)
     {
         Resources res = getResources();
