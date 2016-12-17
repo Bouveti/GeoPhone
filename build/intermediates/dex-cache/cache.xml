@@ -7,7 +7,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="114e6b7bceb30b9932fd25975cad2f883ad7486f">
+        sha1="de5127e3f2c9089d679e69890e79326b209df2d4">
         <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_865f37d7bff8a61c5dfe9df7aa82e3b6618133b7\classes.dex" />
     </item>
     <item
@@ -25,7 +25,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="5ab1ef92fe0d45e8b2f0c1614c75e8e8ffe6ded0">
+        sha1="da40fdd7e5a55bc3353fbe6321f709e45d8bdfe5">
         <dex dex="C:\Users\alexi\Documents\GitHub\GeoPhone\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_ce23b2e739d6f47993577101b3944fb2a9392ad2\classes.dex" />
     </item>
     <item
