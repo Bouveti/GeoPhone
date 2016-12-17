@@ -27,6 +27,8 @@
     <string name="question_secrete_lab">Question de récupération du mot de passe</string>
     <string name="configure_mot_de_passe">Configurer mot de passe</string>
     <string name="votre_mdp_est">Votre mot de passe est:</string>
+    <string name="mauvais_mot_de_passe">Mauvais mot de passe</string>
+    <string name="mot_de_passe_changé">Mot de passe changé</string>
     <string name="title_activity_recent">RecentActivity</string>
     <string name="title_activity_password">PasswordActivity</string>
     <string name="home">Accueil</string>
