@@ -67,6 +67,14 @@
             android:name=".RechercheActivity2"
             android:label="@string/title_activity_recherche2"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ForgottenActivity"
+            android:label="@string/mot_de_passe_oublié"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".InitialisationActivity"
+            android:label="Initialisation"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
 
         <!-- Clé API Google Maps v2 -->
