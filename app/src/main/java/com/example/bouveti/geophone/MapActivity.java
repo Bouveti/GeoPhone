@@ -5,8 +5,6 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -28,14 +26,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Locale;
 
-public class RechercheActivity2 extends AppCompatActivity
+public class MapActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     String contact;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recherche2);
+        setContentView(R.layout.activity_map);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -107,20 +105,20 @@ public class RechercheActivity2 extends AppCompatActivity
             if(lang.equals("en_US"))
             {
                 setLocale(Locale.FRANCE);
-                Toast.makeText(RechercheActivity2.this,
+                Toast.makeText(MapActivity.this,
                         getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.fr_fr);
             } else if (lang.equals("fr_FR"))
             {
                 setLocale(Locale.US);
-                Toast.makeText(RechercheActivity2.this,
+                Toast.makeText(MapActivity.this,
                         getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.en_us);
             } else {
                 setLocale(Locale.FRANCE);
-                Toast.makeText(RechercheActivity2.this,
+                Toast.makeText(MapActivity.this,
                         getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.fr_fr);

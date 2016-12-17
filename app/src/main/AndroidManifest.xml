@@ -64,7 +64,7 @@
             android:label="@string/mot_de_passe"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".RechercheActivity2"
+            android:name=".MapActivity"
             android:label="@string/title_activity_recherche2"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
