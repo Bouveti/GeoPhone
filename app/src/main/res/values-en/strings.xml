@@ -27,6 +27,8 @@
     <string name="configure_mot_de_passe">Configure a password</string>
     <string name="votre_mdp_est">Your password is:</string>
     <string name="home">Home</string>
+    <string name="mauvais_mot_de_passe">Wrong Password</string>
+    <string name="mot_de_passe_changé">Password changed</string>
     <string name="title_activity_parametre">ParametreActivity</string>
     <string name="title_activity_password">PasswordActivity</string>
     <string name="title_activity_recent">RecentActivity</string>

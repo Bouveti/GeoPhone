@@ -79,7 +79,14 @@
         <activity
             android:name=".InitialisationActivity"
             android:label="Initialisation"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <receiver class=".SmsReader"
+            android:name="com.example.bouveti.geophone.SmsReader">
+            <intent-filter android:priority="100">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
 
         <!-- Clé API Google Maps v2 -->
         <meta-data

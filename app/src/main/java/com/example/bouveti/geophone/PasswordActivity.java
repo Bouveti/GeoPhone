@@ -162,14 +162,14 @@ public class PasswordActivity extends AppCompatActivity
             editor.putString("password", newPassword);
             editor.apply();
             Toast.makeText(PasswordActivity.this,
-                    "Mot de passe changé", Toast.LENGTH_SHORT)
+                    getString(R.string.mot_de_passe_changé), Toast.LENGTH_SHORT)
                     .show();
             oldPassSub.setText("");
             newPassSub.setText("");
 
         }else {
             Toast.makeText(PasswordActivity.this,
-                    "Mauvais mot de passe", Toast.LENGTH_SHORT)
+                    getString(R.string.mauvais_mot_de_passe), Toast.LENGTH_SHORT)
                     .show();
         }
     }

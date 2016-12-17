@@ -29,7 +29,10 @@ import java.util.Locale;
 public class MapActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
-    String contact;
+    String phoneNumber;
+    double longitude;
+    double latitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +52,21 @@ public class MapActivity extends AppCompatActivity
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
-                contact = null;
+                phoneNumber = null;
             } else {
-                contact = extras.getString("contact");
+                phoneNumber = extras.getString("number");
+                latitude = Double.parseDouble(extras.getString("latitude"));
+                longitude = Double.parseDouble(extras.getString("longitude"));
+
+                Bundle args = new Bundle();
+                args.putDouble("latitude", latitude);
+                args.putDouble("longitude", longitude);
+
+                getFragmentManager().findFragmentById(R.id.map).setArguments(args);
+
             }
         } else {
-            contact = (String) savedInstanceState.getSerializable("contact");
+            phoneNumber = (String) savedInstanceState.getSerializable("number");
         }
         SupportMapFragment map = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         map.getMapAsync(this);
@@ -179,16 +191,16 @@ public class MapActivity extends AppCompatActivity
 
         MarkerOptions marker = new MarkerOptions();
         marker.position(new LatLng(48.851755, 2.287087));
-        marker.title("Position de "+ contact);
+        marker.title("Position de "+ phoneNumber);
         googleMap.setOnMarkerClickListener(this);
         googleMap.addMarker(marker);
     }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        if (("Position de "+ contact).equals(marker.getTitle()))
+        if (("Position de "+ phoneNumber).equals(marker.getTitle()))
         {
-            Toast.makeText(this.getApplicationContext(), "Position de "+ contact, Toast.LENGTH_LONG).show();
+            Toast.makeText(this.getApplicationContext(), "Position de "+ phoneNumber, Toast.LENGTH_LONG).show();
         }
         return true;
     }

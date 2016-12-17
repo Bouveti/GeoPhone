@@ -15,6 +15,8 @@ import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AlertDialog;
+import android.telephony.SmsManager;
+import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.support.design.widget.NavigationView;
@@ -25,9 +27,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -93,19 +98,33 @@ public class RechercheActivity extends AppCompatActivity
                     final String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
                     final String number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
+                    final EditText input = new EditText(RechercheActivity.this);
+                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.MATCH_PARENT);
+                    input.setLayoutParams(lp);
+                    input.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
 
                     new AlertDialog.Builder(RechercheActivity.this)
                             .setTitle(getString(R.string.button_rechercher) + " " + name + " ?")
-                            .setMessage(getString(R.string.message_recherche_confirm) + " " + name + " (" + number + " )"+ " ?")
+                            .setMessage(getString(R.string.message_recherche_confirm) + " " + name + " (" + number + " )"+ " ?\n\n"+getString(R.string.mot_de_passe))
+                            .setView(input)
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    //sendPositionBySMS(item);
-                                    Intent intent = new Intent(getApplicationContext(), MapActivity.class);
-                                    intent.putExtra("name", name);
-                                    intent.putExtra("number", name);
-                                    startActivity(intent);
-                                    overridePendingTransition(0, 0);
-                                    finish();
+                                    String password = input.getText().toString();
+
+                                    if(sendPositionBySMS(password, number) != null) {
+                                        Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+                                        intent.putExtra("name", name);
+                                        intent.putExtra("number", name);
+                                        startActivity(intent);
+                                        overridePendingTransition(0, 0);
+                                        finish();
+                                    }else {
+                                        Toast.makeText(RechercheActivity.this,
+                                                getString(R.string.mauvais_mot_de_passe), Toast.LENGTH_SHORT)
+                                                .show();
+                                    }
                                 }
                             })
                             .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -243,10 +262,18 @@ public class RechercheActivity extends AppCompatActivity
         }
         return true;
     }
+	
+    public String sendPositionBySMS(String password, String number){
 
-    public void sendPositionBySMS(String item){
+        String coord = null;
 
-        String num;
-        String message;
+        String message = "GEOPHONE//LOCATIONREQUEST//PASSWORD:"+password;
+
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(number, null, message, null, null);
+
+
+
+        return coord;
     }
 }
