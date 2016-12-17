@@ -1,6 +1,7 @@
 package com.example.bouveti.geophone;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -16,8 +17,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Locale;
 
 public class PasswordActivity extends AppCompatActivity
@@ -33,7 +41,7 @@ public class PasswordActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -114,32 +122,63 @@ public class PasswordActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home ) {
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-            overridePendingTransition(0,0);
+        if (id == R.id.nav_home) {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            overridePendingTransition(0, 0);
             finish();
-        }
-        else if (id == R.id.nav_recent) {
-            startActivity(new Intent(getApplicationContext(),RecentActivity.class));
-            overridePendingTransition(0,0);
+        } else if (id == R.id.nav_recent) {
+            startActivity(new Intent(getApplicationContext(), RecentActivity.class));
+            overridePendingTransition(0, 0);
             finish();
 
         } else if (id == R.id.nav_mot_de_passe) {
-            startActivity(new Intent(getApplicationContext(),PasswordActivity.class));
-            overridePendingTransition(0,0);
+            startActivity(new Intent(getApplicationContext(), PasswordActivity.class));
+            overridePendingTransition(0, 0);
             finish();
 
         } else if (id == R.id.nav_parametre) {
-            startActivity(new Intent(getApplicationContext(),ParametreActivity.class));
-            overridePendingTransition(0,0);
+            startActivity(new Intent(getApplicationContext(), ParametreActivity.class));
+            overridePendingTransition(0, 0);
             finish();
-        }
 
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
+    public void changePassword(View v){
+
+        EditText oldPassSub = (EditText) findViewById(R.id.enterPassword);
+        EditText newPassSub =  (EditText) findViewById(R.id.enterNewPassword);
+
+        String password = oldPassSub.getText().toString();
+        String newPassword = newPassSub.getText().toString();
+
+        SharedPreferences config = getSharedPreferences("credentials",0);
+        SharedPreferences.Editor editor = config.edit();
+
+        if(password.equals(config.getString("password",null))){
+            editor.putString("password", newPassword);
+            editor.apply();
+            Toast.makeText(PasswordActivity.this,
+                    "Mot de passe changé", Toast.LENGTH_SHORT)
+                    .show();
+            oldPassSub.setText("");
+            newPassSub.setText("");
+
+        }else {
+            Toast.makeText(PasswordActivity.this,
+                    "Mauvais mot de passe", Toast.LENGTH_SHORT)
+                    .show();
+        }
+    }
+
+    public void toForgotten(View v)
+    {
+        Intent intent = new Intent(this , ForgottenActivity.class);
+        startActivity(intent);
+    }
 
     public void setLocale(Locale lang)
     {

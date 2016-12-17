@@ -44,6 +44,14 @@
             android:name=".PasswordActivity"
             android:label="@string/mot_de_passe"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ForgottenActivity"
+            android:label="@string/mot_de_passe_oublié"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".InitialisationActivity"
+            android:label="Initialisation"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

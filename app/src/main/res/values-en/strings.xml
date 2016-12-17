@@ -17,7 +17,15 @@
     <string name="auteur">Alexis Pambourg and Nicolas Bouvet</string>
     <string name="recent">Recent</string>
     <string name="mot_de_passe">Password</string>
+    <string name ="ancien_mot_de_passe">Previous Password</string>
+    <string name ="nouveau_mot_de_passe">New Password</string>
     <string name="recherche">Research</string>
+    <string name="valider">Submit</string>
+    <string name="mot_de_passe_oublié">Forgotten Password</string>
+    <string name="question_secrete">What is your mother\'s maiden name ?</string>
+    <string name="question_secrete_lab">Question to get your lost password</string>
+    <string name="configure_mot_de_passe">Configure a password</string>
+    <string name="votre_mdp_est">Your password is:</string>
     <string name="home">Home</string>
     <string name="title_activity_parametre">ParametreActivity</string>
     <string name="title_activity_password">PasswordActivity</string>
