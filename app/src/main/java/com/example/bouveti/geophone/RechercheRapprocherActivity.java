@@ -22,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -52,11 +53,11 @@ public class RechercheRapprocherActivity extends AppCompatActivity
         final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.meow);
         final AudioManager audioManager = (AudioManager) this.getSystemService(AUDIO_SERVICE);
 
-        // Set volume max
-        // audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
+        // Met le volume au max
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
         mediaPlayer.setLooping(true);
 
-        //SOS in MORSE
+        //SOS en vibration et MORSE
         int dot = 200;
         int dash = 500;
         int short_gap = 200;
@@ -65,17 +66,17 @@ public class RechercheRapprocherActivity extends AppCompatActivity
         final long[] pattern = { 0, dot, short_gap, dot, short_gap, dot, medium_gap, dash, short_gap, dash, short_gap, dash, medium_gap, dot, short_gap, dot, short_gap, dot, long_gap };
 
         Switch aSwitch = (Switch) findViewById(R.id.switch_vibe_sound);
-        aSwitch.setChecked(false);
+        aSwitch.setChecked(false); // Fix les vibrations et la sonnerie par défault à false
 
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
+                if(isChecked) //If sound and vibration are switched to on, start vibration and sound
                 {
                     mediaPlayer.start();
                     vibrator.vibrate(pattern, 0);
                     button.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
+                        public void onClick(View v) { //Clic sur le boutton trouvé
                             vibrator.cancel();
                             mediaPlayer.pause();
                         }
@@ -88,30 +89,16 @@ public class RechercheRapprocherActivity extends AppCompatActivity
         }
         );
 
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBarWifi);
+        progressBar.setMax(5);
+
         WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
         int numberOfLevels = 5;
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+
+        // Récupérer la puissance du wifi. Plus elle est proche du max(5) plus le téléphone est pret de la borne wifi
         int level = WifiManager.calculateSignalLevel(wifiInfo.getRssi(), numberOfLevels);
-        String power;
-        if(level == 5)
-        {
-            power = "Excellent";
-        } else if(level == 4)
-        {
-            power = "Good";
-        } else if(level == 3)
-        {
-            power = "Medium";
-        } else if(level == 2)
-        {
-            power = "Fair";
-        } else if(level == 1)
-        {
-            power = "Weak";
-        } else if(level == 0)
-        {
-            power = "No connection";
-        }
+        progressBar.setProgress(level);
 
     }
 
