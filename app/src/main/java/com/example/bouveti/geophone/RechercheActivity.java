@@ -113,18 +113,7 @@ public class RechercheActivity extends AppCompatActivity
                                 public void onClick(DialogInterface dialog, int which) {
                                     String password = input.getText().toString();
 
-                                    if(sendPositionBySMS(password, number) != null) {
-                                        Intent intent = new Intent(getApplicationContext(), MapActivity.class);
-                                        intent.putExtra("name", name);
-                                        intent.putExtra("number", name);
-                                        startActivity(intent);
-                                        overridePendingTransition(0, 0);
-                                        finish();
-                                    }else {
-                                        Toast.makeText(RechercheActivity.this,
-                                                getString(R.string.mauvais_mot_de_passe), Toast.LENGTH_SHORT)
-                                                .show();
-                                    }
+                                    sendPositionBySMS(password, number);
                                 }
                             })
                             .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -263,17 +252,12 @@ public class RechercheActivity extends AppCompatActivity
         return true;
     }
 	
-    public String sendPositionBySMS(String password, String number){
-
-        String coord = null;
+    public void sendPositionBySMS(String password, String number){
 
         String message = "GEOPHONE//LOCATIONREQUEST//PASSWORD:"+password;
 
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(number, null, message, null, null);
 
-
-
-        return coord;
     }
 }
