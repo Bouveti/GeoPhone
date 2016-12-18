@@ -44,14 +44,14 @@ public class InitialisationActivity extends AppCompatActivity
     //Appel lors de l'utilisation du bouton retour
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Exit")
-                .setMessage("Are you sure you want to exit?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle(R.string.exit)
+                .setMessage(R.string.sure_exit)
+                .setPositiveButton(R.string.oui, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finishAffinity();
                     }
-                }).setNegativeButton("No", null).show();
+                }).setNegativeButton(R.string.non, null).show();
     }
 
     @Override
@@ -133,7 +133,6 @@ public class InitialisationActivity extends AppCompatActivity
 
         finish();
     }
-
 
     //Rafraichissement de l'activité au changement de langue
     public void setLocale(Locale lang)

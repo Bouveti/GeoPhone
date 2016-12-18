@@ -184,7 +184,7 @@ public class MapActivity extends AppCompatActivity
 
         MarkerOptions marker = new MarkerOptions();
         marker.position(new LatLng(this.latitude, this.longitude));
-        marker.title("Position de "+ phoneNumber);
+        marker.title( R.string.position_of + phoneNumber);
 
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(this.latitude, this.longitude), 9));
 
@@ -195,9 +195,9 @@ public class MapActivity extends AppCompatActivity
     //Méthode de message sur clique du marker
     @Override
     public boolean onMarkerClick(Marker marker) {
-        if (("Position de "+ phoneNumber).equals(marker.getTitle()))
+        if (( R.string.position_of + phoneNumber).equals(marker.getTitle()))
         {
-            Toast.makeText(this.getApplicationContext(), "Position de "+ phoneNumber, Toast.LENGTH_LONG).show();
+            Toast.makeText(this.getApplicationContext(), R.string.position_of + phoneNumber, Toast.LENGTH_LONG).show();
         }
         return true;
     }

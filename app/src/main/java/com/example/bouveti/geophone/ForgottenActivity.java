@@ -160,7 +160,7 @@ public class ForgottenActivity extends AppCompatActivity
         }else{
             //Sinon, message d'erreur
             Toast.makeText(ForgottenActivity.this,
-                    "Mauvaise réponse", Toast.LENGTH_SHORT)
+                    R.string.bad_answer, Toast.LENGTH_SHORT)
                     .show();
         }
     }

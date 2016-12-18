@@ -35,7 +35,7 @@
     <string name="title_activity_password">PasswordActivity</string>
     <string name="home">Accueil</string>
     <string name="title_activity_map">Carte</string>
-    <string name="message_recherche_confirm">Son téléphone va sonner. Êtes-vous sur de vouloir rechercher</string>
+    <string name="message_recherche_confirm">Êtes-vous sur de vouloir le rechercher</string>
     <string name="change_lang">Changement de langue pour le Français</string>
     <string name="title_activity_recherche_rapprocher">RechercheRapprocherActivity</string>
     <string name="carte">Carte</string>
@@ -46,4 +46,11 @@
     <string name="recherche_rapproche">Recherche Rapproché</string>
     <string name="go_to_recherche_raproche">Passer en navigation rapproché</string>
     <string name="go_nav">Lancer la navigation</string>
+    <string name="position_of">Position de</string>
+    <string name="bad_answer">Mauvaise réponse</string>
+    <string name="exit">Sortie</string>
+    <string name="sure_exit">Etes-vous de vouloir quitter ?</string>
+    <string name="oui">Oui</string>
+    <string name="non">Non</string>
+
 </resources>
