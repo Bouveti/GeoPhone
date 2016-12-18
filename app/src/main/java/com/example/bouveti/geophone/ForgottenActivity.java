@@ -94,28 +94,27 @@ public class ForgottenActivity extends AppCompatActivity
 
             if(lang.equals("en_US"))
             {
-                Toast.makeText(ForgottenActivity.this ,
-                        "Changement de langue pour le Français", Toast.LENGTH_SHORT)
+                setLocale(Locale.FRANCE);
+                Toast.makeText(ForgottenActivity.this,
+                        getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.fr_fr);
-                setLocale(Locale.FRANCE);
             } else if (lang.equals("fr_FR"))
             {
-                Toast.makeText(ForgottenActivity.this,
-                        "Change of language for English", Toast.LENGTH_SHORT)
-                        .show();
-                    item.setIcon(R.drawable.en_us);
                 setLocale(Locale.US);
-            } else {
                 Toast.makeText(ForgottenActivity.this,
-                        "Changement de langue pour le Français", Toast.LENGTH_SHORT)
+                        getString(R.string.change_lang), Toast.LENGTH_SHORT)
+                        .show();
+                item.setIcon(R.drawable.en_us);
+            } else {
+                setLocale(Locale.FRANCE);
+                Toast.makeText(ForgottenActivity.this,
+                        getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.fr_fr);
-                setLocale(Locale.FRANCE);
             }
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -130,22 +129,9 @@ public class ForgottenActivity extends AppCompatActivity
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             overridePendingTransition(0,0);
             finish();
-        }
-        else if (id == R.id.nav_recent) {
-            //Lancement de l'activité "Récent"
-            startActivity(new Intent(getApplicationContext(),RecentActivity.class));
-            overridePendingTransition(0,0);
-            finish();
-
-            //Lancement de l'activité "Mot de passe"
         } else if (id == R.id.nav_mot_de_passe) {
+            //Lancement de l'activité "Mot de passe"
             startActivity(new Intent(getApplicationContext(), com.example.bouveti.geophone.PasswordActivity.class));
-            overridePendingTransition(0,0);
-            finish();
-
-            //Lancement de l'activité "Paramètres"
-        } else if (id == R.id.nav_parametre) {
-            startActivity(new Intent(getApplicationContext(),ParametreActivity.class));
             overridePendingTransition(0,0);
             finish();
         }
@@ -177,7 +163,6 @@ public class ForgottenActivity extends AppCompatActivity
                     "Mauvaise réponse", Toast.LENGTH_SHORT)
                     .show();
         }
-
     }
 
     //Rafraichissement de l'activité au changement de langue

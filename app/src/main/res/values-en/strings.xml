@@ -37,4 +37,13 @@
     <string name="message_recherche_confirm">His phone will ring. Are you sure you want to search</string>
     <string name="title_activity_map">Map</string>
     <string name="change_lang">Change of language for English</string>
+    <string name="carte">Map</string>
+    <string name="name_of_wifi">Name of wifi :</string>
+    <string name="power_wifi">Power of wifi</string>
+    <string name="found">Found</string>
+    <string name="sound_and_vibration">Ring and vibrate?</string>
+    <string name="recherche_rapproche">Search close-up</string>
+    <string name="go_to_recherche_raproche">Switch to close-up</string>
+    <string name="go_nav">Start navigation</string>
+
 </resources>

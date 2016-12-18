@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -19,13 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Locale;
 
 public class PasswordActivity extends AppCompatActivity
@@ -118,7 +109,6 @@ public class PasswordActivity extends AppCompatActivity
             }
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -133,18 +123,8 @@ public class PasswordActivity extends AppCompatActivity
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             overridePendingTransition(0, 0);
             finish();
-        } else if (id == R.id.nav_recent) {
-            startActivity(new Intent(getApplicationContext(), RecentActivity.class));
-            overridePendingTransition(0, 0);
-            finish();
-
         } else if (id == R.id.nav_mot_de_passe) {
             startActivity(new Intent(getApplicationContext(), PasswordActivity.class));
-            overridePendingTransition(0, 0);
-            finish();
-
-        } else if (id == R.id.nav_parametre) {
-            startActivity(new Intent(getApplicationContext(), ParametreActivity.class));
             overridePendingTransition(0, 0);
             finish();
 

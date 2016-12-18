@@ -1,19 +1,14 @@
 package com.example.bouveti.geophone;
 
-import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
 
 /**
  * Created by Bouveti on 17/12/2016.
@@ -22,16 +17,12 @@ import android.util.Log;
 public class GPSTracker extends Service implements LocationListener {
 
     private final Context mContext;
-
     // flag for GPS status
     boolean isGPSEnabled = false;
-
     // flag for network status
     boolean isNetworkEnabled = false;
-
     // flag for GPS status
     boolean canGetLocation = false;
-
     Location location; // location
     double latitude; // latitude
     double longitude; // longitude
@@ -102,8 +93,6 @@ public class GPSTracker extends Service implements LocationListener {
         }
         return location;
     }
-
-
     //Fonction de récupération de la Latitude
     public double getLatitude(){
         if(location != null){

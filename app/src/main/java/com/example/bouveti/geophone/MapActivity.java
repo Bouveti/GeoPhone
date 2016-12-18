@@ -5,9 +5,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,16 +16,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.util.Locale;
 
 public class MapActivity extends AppCompatActivity
@@ -157,21 +152,11 @@ public class MapActivity extends AppCompatActivity
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             overridePendingTransition(0,0);
             finish();
-        }
-        else if (id == R.id.nav_recent) {
-            startActivity(new Intent(getApplicationContext(),RecentActivity.class));
-            overridePendingTransition(0,0);
-            finish();
-
-        } else if (id == R.id.nav_mot_de_passe) {
+        }else if (id == R.id.nav_mot_de_passe) {
             startActivity(new Intent(getApplicationContext(),PasswordActivity.class));
             overridePendingTransition(0,0);
             finish();
 
-        } else if (id == R.id.nav_parametre) {
-            startActivity(new Intent(getApplicationContext(),ParametreActivity.class));
-            overridePendingTransition(0,0);
-            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

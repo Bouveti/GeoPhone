@@ -13,35 +13,6 @@
     tools:context="com.example.bouveti.geophone.MapActivity"
     tools:showIn="@layout/app_bar_map">
 
-    <TextView
-        android:text="@string/recherche"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="117dp"
-        android:id="@+id/textView3" />
-
-    <Button
-        android:text="Lancer la navigation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_marginTop="22dp"
-        android:id="@+id/button"
-        android:onClick="LaunchNavInMaps"/>
-
-    <Button
-        android:text="Passer en navigation rapproché"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button"
-        android:layout_alignStart="@+id/button"
-        android:layout_marginTop="17dp"
-        android:id="@+id/button2"
-        android:onClick="toRechercheRapprochee" />
-
     <fragment
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -58,5 +29,34 @@
         map:uiZoomControls="true"
         map:uiMapToolbar="true"
         map:uiTiltGestures="true" />
+
+    <Button
+        android:text="@string/go_to_recherche_raproche"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:id="@+id/button2"
+        android:onClick="toRechercheRapprochee"
+        android:layout_below="@+id/button"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="@string/go_nav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:id="@+id/button"
+        android:onClick="LaunchNavInMaps"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="@string/carte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:id="@+id/textView3"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

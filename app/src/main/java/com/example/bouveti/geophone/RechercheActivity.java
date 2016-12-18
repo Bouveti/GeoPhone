@@ -1,7 +1,6 @@
 package com.example.bouveti.geophone;
 
 import android.Manifest;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,7 +17,6 @@ import android.support.v7.app.AlertDialog;
 import android.telephony.SmsManager;
 import android.text.InputType;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -27,7 +25,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -35,12 +32,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
 public class RechercheActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -194,23 +186,12 @@ public class RechercheActivity extends AppCompatActivity
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             overridePendingTransition(0,0);
             finish();
-        }
-        else if (id == R.id.nav_recent) {
-            startActivity(new Intent(getApplicationContext(),RecentActivity.class));
-            overridePendingTransition(0,0);
-            finish();
-
         } else if (id == R.id.nav_mot_de_passe) {
             startActivity(new Intent(getApplicationContext(),PasswordActivity.class));
             overridePendingTransition(0,0);
             finish();
 
-        } else if (id == R.id.nav_parametre) {
-            startActivity(new Intent(getApplicationContext(),ParametreActivity.class));
-            overridePendingTransition(0,0);
-            finish();
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

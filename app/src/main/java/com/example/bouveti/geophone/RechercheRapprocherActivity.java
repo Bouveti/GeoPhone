@@ -25,8 +25,6 @@ import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.Toast;
-
-import java.io.IOException;
 import java.util.Locale;
 
 public class RechercheRapprocherActivity extends AppCompatActivity
@@ -172,7 +170,6 @@ public class RechercheRapprocherActivity extends AppCompatActivity
             }
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -186,21 +183,11 @@ public class RechercheRapprocherActivity extends AppCompatActivity
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             overridePendingTransition(0,0);
             finish();
-        }
-        else if (id == R.id.nav_recent) {
-            startActivity(new Intent(getApplicationContext(),RecentActivity.class));
-            overridePendingTransition(0,0);
-            finish();
-
-        } else if (id == R.id.nav_mot_de_passe) {
+        }else if (id == R.id.nav_mot_de_passe) {
             startActivity(new Intent(getApplicationContext(),PasswordActivity.class));
             overridePendingTransition(0,0);
             finish();
 
-        } else if (id == R.id.nav_parametre) {
-            startActivity(new Intent(getApplicationContext(),ParametreActivity.class));
-            overridePendingTransition(0,0);
-            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
