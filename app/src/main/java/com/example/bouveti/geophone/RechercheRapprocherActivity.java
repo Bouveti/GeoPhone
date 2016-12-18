@@ -25,11 +25,15 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.Locale;
 
 public class RechercheRapprocherActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    String wifiName;
+    int intensityWifi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,29 @@ public class RechercheRapprocherActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Récupération des paramètres de l'activité précédente
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                wifiName = getString(R.string.erreur_wifi);
+                intensityWifi = 0;
+            } else {
+                wifiName = extras.getString("ssid");
+                intensityWifi = extras.getInt("level");
+            }
+        } else {
+            wifiName = (String) savedInstanceState.getSerializable("ssid");
+            intensityWifi = (int) savedInstanceState.getSerializable("number");
+        }
+
+        TextView tvWifiName = (TextView) findViewById(R.id.tvWifiName);
+        tvWifiName.setText(wifiName);
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBarWifi);
+        progressBar.setMax(5);
+
+        // Remplir la progressbar plus la puissance du signal du wifi est forte
+        progressBar.setProgress(intensityWifi);
 
         final Button button = (Button) findViewById(R.id.found);
         final Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -90,18 +117,6 @@ public class RechercheRapprocherActivity extends AppCompatActivity
             }
         }
         );
-
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBarWifi);
-        progressBar.setMax(5);
-
-        WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
-        int numberOfLevels = 5;
-        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-
-        // Récupérer la puissance du wifi. Plus elle est proche du max(5) plus le téléphone est pret de la borne wifi
-        int level = WifiManager.calculateSignalLevel(wifiInfo.getRssi(), numberOfLevels);
-        progressBar.setProgress(level);
-
     }
 
     //Appel lors de l'utilisation du bouton retour
