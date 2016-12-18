@@ -53,4 +53,5 @@
     <string name="oui">Yes</string>
     <string name="non">No</string>
     <string name="message_envoye">Request sent, wait please...</string>
+    <string name="erreur_wifi">Not connected on a Wifi</string>
 </resources>
