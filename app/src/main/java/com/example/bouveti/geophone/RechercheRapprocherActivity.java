@@ -1,4 +1,4 @@
-package com.example.bouveti.geophone;
+﻿package com.example.bouveti.geophone;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.telephony.SmsManager;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -209,3 +210,4 @@ public class RechercheRapprocherActivity extends AppCompatActivity
         finish();
     }
 }
+

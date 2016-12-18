@@ -1,4 +1,4 @@
-package com.example.bouveti.geophone;
+﻿package com.example.bouveti.geophone;
 
 import android.Manifest;
 import android.content.Context;
@@ -32,6 +32,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import java.util.Locale;
 
 public class RechercheActivity extends AppCompatActivity
@@ -244,7 +245,7 @@ public class RechercheActivity extends AppCompatActivity
                     public void onClick(DialogInterface dialog, int which) {
                         String password = input.getText().toString();
 
-                        sendPositionBySMS(password, number);
+                        requestPositionBySMS(password, number);
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -283,7 +284,7 @@ public class RechercheActivity extends AppCompatActivity
     }
 
     //Méthode d'envois de la requête de position
-    public void sendPositionBySMS(String password, String number){
+    public void requestPositionBySMS(String password, String number){
 
         String message = "GEOPHONE//LOCATIONREQUEST//PASSWORD:"+password;
 
