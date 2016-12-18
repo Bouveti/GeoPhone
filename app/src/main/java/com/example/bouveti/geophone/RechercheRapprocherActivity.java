@@ -1,4 +1,4 @@
-﻿package com.example.bouveti.geophone;
+package com.example.bouveti.geophone;
 
 import android.content.Context;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-﻿package com.example.bouveti.geophone;
+package com.example.bouveti.geophone;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -92,7 +92,7 @@ public class SmsReader extends BroadcastReceiver{
         }else if(messageBody.contains("LOCATION")){
 
             //Sinon, parsing des coordonnées dans le SMS
-            Double longitudeReceived = Double.parseDouble(messageBody.substring(messageBody.lastIndexOf("=")+1,messageBody.lastIndexOf("~")));
+            Double longitudeReceived = Double.parseDouble(messageBody.substring(messageBody.lastIndexOf("=")+1,messageBody.length()-5));
             Double latitudeReceived = Double.parseDouble(messageBody.substring(44,messageBody.lastIndexOf("/")));
             String password = messageBody.substring(messageBody.length()-4);
 
@@ -142,7 +142,7 @@ public class SmsReader extends BroadcastReceiver{
         //Si le mot de passe reçu correspond à celui enregistré
         if(passwordReceived.equals(password)&&responseType == 1){
             //Ajout des coordonnées au message de réponse
-            response += "LOCATION:GEOLAT=" + this.latitude + "/GEOLONG=" + this.longitude+"~"+password;
+            response += "LOCATION:GEOLAT=" + this.latitude + "/GEOLONG=" + this.longitude+"&"+password;
 
         }else if(passwordReceived.equals(password)&&responseType == 0){
             //Ajout de la force du signal Wifi
@@ -185,7 +185,7 @@ public class SmsReader extends BroadcastReceiver{
     }
 
     public void toRechercheRapprochee(Context context, String ssid, int level){
-        Intent intent = new Intent(context.getApplicationContext(), MapActivity.class);
+        Intent intent = new Intent(context.getApplicationContext(), RechercheRapprocherActivity.class);
 
         //Récupération des paramètres
         intent.putExtra("ssid", ssid);
@@ -206,7 +206,7 @@ public class SmsReader extends BroadcastReceiver{
         //Creation de la notification PUSH
         NotificationManager notif=(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notify=new Notification.Builder
-                (context).setContentTitle("GeoPhone").setContentText("Quelqu'un vous a géolocalisé : "+phoneNumber).
+                (context).setContentTitle("GeoPhone").setContentText("Quelqu'un vous a geolocalise : "+phoneNumber).
                 setContentTitle("GeoPhone").setSmallIcon(R.drawable.ic_menu_share).build();
 
         //Activation de la notification
