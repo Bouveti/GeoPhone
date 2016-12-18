@@ -10,7 +10,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.telephony.SmsManager;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -28,14 +27,14 @@ import android.widget.Switch;
 import android.widget.Toast;
 import java.util.Locale;
 
-public class RechercheRapprocherActivity extends AppCompatActivity
+public class RechercheRapprocheeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Récupération du layout de l'activité
-        setContentView(R.layout.activity_recherche_rapprocher);
+        setContentView(R.layout.activity_recherche_rapprochee);
         //Mise en place de la barre d'action
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -151,20 +150,20 @@ public class RechercheRapprocherActivity extends AppCompatActivity
             if(lang.equals("en_US"))
             {
                 setLocale(Locale.FRANCE);
-                Toast.makeText(RechercheRapprocherActivity.this,
+                Toast.makeText(RechercheRapprocheeActivity.this,
                         getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.fr_fr);
             } else if (lang.equals("fr_FR"))
             {
                 setLocale(Locale.US);
-                Toast.makeText(RechercheRapprocherActivity.this,
+                Toast.makeText(RechercheRapprocheeActivity.this,
                         getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.en_us);
             } else {
                 setLocale(Locale.FRANCE);
-                Toast.makeText(RechercheRapprocherActivity.this,
+                Toast.makeText(RechercheRapprocheeActivity.this,
                         getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.fr_fr);
@@ -204,10 +203,12 @@ public class RechercheRapprocherActivity extends AppCompatActivity
         Configuration conf = res.getConfiguration();
         conf.locale = lang;
         res.updateConfiguration(conf, dm);
-        Intent refresh = new Intent(this, RechercheRapprocherActivity.class);
+        Intent refresh = new Intent(this, RechercheRapprocheeActivity.class);
         startActivity(refresh);
         overridePendingTransition(0,0);
         finish();
     }
+
+
 }
 

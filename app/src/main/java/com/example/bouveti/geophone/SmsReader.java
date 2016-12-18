@@ -6,10 +6,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -101,9 +97,10 @@ public class SmsReader extends BroadcastReceiver{
         }else if(messageBody.contains("WIFI")){
 
             String ssid = messageBody.substring(43,messageBody.lastIndexOf("/"));
-            int level = Integer.parseInt(messageBody.substring(messageBody.lastIndexOf("=")+1));
+            int level = Integer.parseInt(messageBody.substring(messageBody.lastIndexOf("=")+1,messageBody.length()-5));
+            String password = messageBody.substring(messageBody.length()-4);
 
-            this.toRechercheRapprochee(context, ssid, level);
+            this.toRechercheRapprochee(context, ssid, level, password);
         }
     }
 
@@ -146,7 +143,7 @@ public class SmsReader extends BroadcastReceiver{
 
         }else if(passwordReceived.equals(password)&&responseType == 0){
             //Ajout de la force du signal Wifi
-            response += "WIFIINFO:SSID="+ this.ssid +"/LEVEL=" + this.wifi;
+            response += "WIFIINFO:SSID="+ this.ssid +"/LEVEL=" + this.wifi+"&"+password;
 
         }else{
             //Sinon, ajout de la mention "Mauvais mot de passe"
@@ -184,10 +181,12 @@ public class SmsReader extends BroadcastReceiver{
         context.startActivity(intent);
     }
 
-    public void toRechercheRapprochee(Context context, String ssid, int level){
-        Intent intent = new Intent(context.getApplicationContext(), RechercheRapprocherActivity.class);
+    public void toRechercheRapprochee(Context context, String ssid, int level, String password){
+        Intent intent = new Intent(context.getApplicationContext(), RechercheRapprocheeActivity.class);
 
         //Récupération des paramètres
+        intent.putExtra("number", this.phoneNumber);
+        intent.putExtra("password", password);
         intent.putExtra("ssid", ssid);
         intent.putExtra("level", level);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
