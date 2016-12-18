@@ -1,4 +1,4 @@
-package com.example.bouveti.geophone;
+﻿package com.example.bouveti.geophone;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -14,7 +14,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.support.v4.app.ActivityCompat;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
@@ -24,7 +23,6 @@ import android.util.Log;
  */
 
 public class SmsReader extends BroadcastReceiver{
-
 
     private String phoneNumber;
     private String password;
@@ -218,5 +216,4 @@ public class SmsReader extends BroadcastReceiver{
         //On release le fait d'avoir allume l'ecran
         screenOn.release();
     }
-
 }

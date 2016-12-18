@@ -18,36 +18,16 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:id="@+id/nom_app"
-        android:text="@string/app_name" />
-
-    <Button
-        android:text="@string/button_associer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/nom_app"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="82dp"
-        android:id="@+id/button_associer" />
+        android:text="@string/app_name"
+        android:textSize="30dp"/>
 
     <Button
         android:text="@string/button_rechercher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="66dp"
-        android:id="@+id/button_rechercher"
-        android:layout_below="@+id/button_associer"
-        android:layout_centerHorizontal="true"
-        android:onClick="toRecherche"
-        />
-
-    <Button
-        android:text="@string/button_rechercher_par_mdp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
         android:id="@+id/button_rechercher_par_mdp"
-        android:layout_below="@+id/button_rechercher"
-        android:layout_centerHorizontal="true"
-        android:onClick="toRechercheByPassword"/>
+        android:onClick="toRechercheByPassword"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -57,14 +57,6 @@
             android:label="@string/recherche"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ParametreActivity"
-            android:label="@string/action_settings"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".RecentActivity"
-            android:label="@string/recent"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".PasswordActivity"
             android:label="@string/mot_de_passe"
             android:theme="@style/AppTheme.NoActionBar" />

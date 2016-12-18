@@ -38,4 +38,12 @@
     <string name="message_recherche_confirm">Son téléphone va sonner. Êtes-vous sur de vouloir rechercher</string>
     <string name="change_lang">Changement de langue pour le Français</string>
     <string name="title_activity_recherche_rapprocher">RechercheRapprocherActivity</string>
+    <string name="carte">Carte</string>
+    <string name="name_of_wifi">Nom du wifi :</string>
+    <string name="power_wifi">Puissance du wifi</string>
+    <string name="found">Trouvé</string>
+    <string name="sound_and_vibration">Faire sonner et vibrer ?</string>
+    <string name="recherche_rapproche">Recherche Rapproché</string>
+    <string name="go_to_recherche_raproche">Passer en navigation rapproché</string>
+    <string name="go_nav">Lancer la navigation</string>
 </resources>

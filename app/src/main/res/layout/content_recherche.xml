@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
         android:id="@+id/validate"
-        android:layout_above="@+id/listView"
+        android:layout_above="@+id/list"
         android:layout_toEndOf="@+id/recherche_sans_contact"
         android:onClick="rechercheSansContact"/>
 

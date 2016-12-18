@@ -6,11 +6,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,17 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by Bouveti on 16/12/2016.
@@ -89,24 +75,24 @@ public class InitialisationActivity extends AppCompatActivity
 
             if(lang.equals("en_US"))
             {
+                setLocale(Locale.FRANCE);
                 Toast.makeText(InitialisationActivity.this,
-                        "Changement de langue pour le Français", Toast.LENGTH_SHORT)
+                        getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.fr_fr);
-                setLocale(Locale.FRANCE);
             } else if (lang.equals("fr_FR"))
             {
+                setLocale(Locale.US);
                 Toast.makeText(InitialisationActivity.this,
-                        "Change of language for English", Toast.LENGTH_SHORT)
+                        getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.en_us);
-                setLocale(Locale.US);
             } else {
+                setLocale(Locale.FRANCE);
                 Toast.makeText(InitialisationActivity.this,
-                        "Changement de langue pour le Français", Toast.LENGTH_SHORT)
+                        getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.fr_fr);
-                setLocale(Locale.FRANCE);
             }
             return true;
         }

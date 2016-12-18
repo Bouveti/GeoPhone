@@ -1,4 +1,4 @@
-package com.example.bouveti.geophone;
+﻿package com.example.bouveti.geophone;
 
 import android.Manifest;
 import android.content.Context;
@@ -187,23 +187,12 @@ public class RechercheActivity extends AppCompatActivity
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             overridePendingTransition(0,0);
             finish();
-        }
-        else if (id == R.id.nav_recent) {
-            startActivity(new Intent(getApplicationContext(),RecentActivity.class));
-            overridePendingTransition(0,0);
-            finish();
-
         } else if (id == R.id.nav_mot_de_passe) {
             startActivity(new Intent(getApplicationContext(),PasswordActivity.class));
             overridePendingTransition(0,0);
             finish();
 
-        } else if (id == R.id.nav_parametre) {
-            startActivity(new Intent(getApplicationContext(),ParametreActivity.class));
-            overridePendingTransition(0,0);
-            finish();
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

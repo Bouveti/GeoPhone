@@ -14,41 +14,68 @@
     tools:showIn="@layout/app_bar_recherche_rapprocher">
 
     <TextView
-        android:text="KEK"
+        android:text="@string/recherche_rapproche"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:id="@+id/textView4"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="101dp"
-        android:layout_marginTop="67dp"
-        android:id="@+id/textView4" />
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        />
+
+    <Switch
+        android:text="@string/sound_and_vibration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/switch_vibe_sound"
+        android:layout_below="@+id/progressBarWifi"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp" />
 
     <Button
-        android:text="Trouvé"
+        android:text="@string/found"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/found"
         android:onClick="Found"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/textView4"
-        android:layout_marginBottom="127dp" />
+        android:layout_below="@+id/switch_vibe_sound"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp" />
 
-    <Switch
-        android:text="Faire sonner et vibrer ?"
+    <TextView
+        android:text="@string/power_wifi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/switch_vibe_sound"
-        android:layout_marginBottom="54dp"
-        android:layout_above="@+id/found"
+        android:id="@+id/textView5"
+        android:layout_marginBottom="15dp"
+        android:layout_above="@+id/switch_vibe_sound"
         android:layout_centerHorizontal="true" />
 
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="105dp"
+        android:id="@+id/progressBarWifi"
+        android:layout_below="@+id/textView4"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="@string/name_of_wifi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView4"
-        android:layout_toStartOf="@+id/switch_vibe_sound"
-        android:layout_marginTop="57dp"
-        android:id="@+id/progressBar3" />
+        android:layout_above="@+id/textView5"
+        android:layout_alignStart="@+id/textView4"
+        android:layout_marginBottom="27dp"
+        android:id="@+id/textView2" />
+
+    <TextView
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignStart="@+id/textView5"
+        android:id="@+id/tvWifiName" />
 
 </RelativeLayout>
