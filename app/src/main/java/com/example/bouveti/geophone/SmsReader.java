@@ -207,7 +207,7 @@ public class SmsReader extends BroadcastReceiver{
         NotificationManager notif=(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notify=new Notification.Builder
                 (context).setContentTitle("GeoPhone").setContentText("Quelqu'un vous a geolocalise : "+phoneNumber).
-                setContentTitle("GeoPhone").setSmallIcon(R.drawable.ic_menu_share).build();
+                setContentTitle("GeoPhone").setSmallIcon(R.drawable.ic_gps_fixed_white_24dp).build();
 
         //Activation de la notification
         notify.flags |= Notification.FLAG_AUTO_CANCEL;

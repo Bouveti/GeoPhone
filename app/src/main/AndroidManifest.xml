@@ -30,10 +30,13 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <!-- Vibration -->
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- Wifi -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -71,10 +74,11 @@
         <activity
             android:name=".InitialisationActivity"
             android:label="Initialisation"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <receiver class=".SmsReader"
-            android:name="com.example.bouveti.geophone.SmsReader">
+        <receiver
+            android:name=".SmsReader"
+            class=".SmsReader">
             <intent-filter android:priority="100">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
@@ -91,6 +95,10 @@
         <activity
             android:name=".RechercheRapprocherActivity"
             android:label="@string/title_activity_recherche_rapprocher"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RingActivity"
+            android:label="@string/title_activity_ring"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
