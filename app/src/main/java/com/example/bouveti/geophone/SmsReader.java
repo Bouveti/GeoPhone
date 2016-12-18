@@ -88,19 +88,21 @@ public class SmsReader extends BroadcastReceiver{
         }else if(messageBody.contains("LOCATION")){
 
             //Sinon, parsing des coordonnées dans le SMS
-            Double longitudeReceived = Double.parseDouble(messageBody.substring(messageBody.lastIndexOf("=")+1,messageBody.length()-5));
+            Double longitudeReceived = Double.parseDouble(messageBody.substring(messageBody.lastIndexOf("=")+1,messageBody.lastIndexOf("&")));
             Double latitudeReceived = Double.parseDouble(messageBody.substring(44,messageBody.lastIndexOf("/")));
-            String password = messageBody.substring(messageBody.length()-4);
+            String password = messageBody.substring(messageBody.lastIndexOf("&")+1);
 
             //Redirection vers la navigation
             this.toMap(context, latitudeReceived, longitudeReceived ,password);
         }else if(messageBody.contains("WIFI")){
 
             String ssid = messageBody.substring(43,messageBody.lastIndexOf("/"));
-            int level = Integer.parseInt(messageBody.substring(messageBody.lastIndexOf("=")+1,messageBody.length()-5));
-            String password = messageBody.substring(messageBody.length()-4);
+            int level = Integer.parseInt(messageBody.substring(messageBody.lastIndexOf("=")+1,messageBody.lastIndexOf("&")));
+            String password = messageBody.substring(messageBody.lastIndexOf("&")+1);
 
             this.toRechercheRapprochee(context, ssid, level, password);
+        }else if(messageBody.contains("RING")){
+            this.ringScreen(context, messageBody, password);
         }
     }
 
@@ -165,6 +167,20 @@ public class SmsReader extends BroadcastReceiver{
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
 
+    }
+
+    public void ringScreen(Context context, String messageBody, String password){
+
+        if(messageBody.substring(messageBody.lastIndexOf("&")).equals(password)){
+
+            Intent intent = new Intent(context.getApplicationContext(), RingActivity.class);
+
+            //Récupération des paramètres
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            context.startActivity(intent);
+
+        }
     }
 
     //Méthode de redirection vers l'activité de locatlisation avec les coordonnées reçues en paramètres et le numéro envoyeur
