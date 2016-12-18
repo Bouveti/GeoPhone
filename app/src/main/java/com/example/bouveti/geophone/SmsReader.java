@@ -85,23 +85,32 @@ public class SmsReader extends BroadcastReceiver{
         }else if(messageBody.contains("WRONG_PASSWORD")){
             //Blocage de la localisation
             this.denyLocation(context);
+
+            //Si le SMS est une réponse de Localisation
         }else if(messageBody.contains("LOCATION")){
 
-            //Sinon, parsing des coordonnées dans le SMS
+            //Parsing des coordonnées dans le SMS
             Double longitudeReceived = Double.parseDouble(messageBody.substring(messageBody.lastIndexOf("=")+1,messageBody.lastIndexOf("&")));
             Double latitudeReceived = Double.parseDouble(messageBody.substring(44,messageBody.lastIndexOf("/")));
             String password = messageBody.substring(messageBody.lastIndexOf("&")+1);
 
             //Redirection vers la navigation
             this.toMap(context, latitudeReceived, longitudeReceived ,password);
+
+            //Si le SMS est une réponse d'information Wifi
         }else if(messageBody.contains("WIFI")){
 
+            //Parsing des informations dans le SMS
             String ssid = messageBody.substring(43,messageBody.lastIndexOf("/"));
             int level = Integer.parseInt(messageBody.substring(messageBody.lastIndexOf("=")+1,messageBody.lastIndexOf("&")));
             String password = messageBody.substring(messageBody.lastIndexOf("&")+1);
 
+            //Redirection vers la navigation rapprochée
             this.toRechercheRapprochee(context, ssid, level, password);
+
+            //Si le SMS est une demande de Sonnerie/Vibration
         }else if(messageBody.contains("RING")){
+            //Redirection vers la méthode de traitement
             this.ringScreen(context, messageBody, password);
         }
     }
@@ -112,6 +121,7 @@ public class SmsReader extends BroadcastReceiver{
         int responseType = -1;
         String response = "GEOPHONE//";
 
+        //Si le SMS est une requête de géolocalisation
         if (messageBody.contains("GEOPHONE//LOCATIONREQUEST//")) {
             //Récupération des coordonnées GPS de l'appareil
             this.latitude = this.tracker.getLatitude();
@@ -121,14 +131,17 @@ public class SmsReader extends BroadcastReceiver{
             response += "LOCATIONRESPONSE//";
             responseType = 1;
 
+            //Si le SMS est une requête d'information wifi
         }else if (messageBody.contains("GEOPHONE//WIFIINFOREQUEST//")){
 
+            //Récupération des informations du réseau wifi connecté au téléphone
             WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             int numberOfLevels = 5;
             WifiInfo wifiInfo = wifiManager.getConnectionInfo();
             this.wifi = WifiManager.calculateSignalLevel(wifiInfo.getRssi(), numberOfLevels);
             this.ssid = wifiInfo.getSSID();
 
+            //Initialisation du message de réponse
             response += "WIFIINFORESPONSE//";
             responseType = 0;
         }
@@ -144,7 +157,7 @@ public class SmsReader extends BroadcastReceiver{
             response += "LOCATION:GEOLAT=" + this.latitude + "/GEOLONG=" + this.longitude+"&"+password;
 
         }else if(passwordReceived.equals(password)&&responseType == 0){
-            //Ajout de la force du signal Wifi
+            //Ajout des informations Wifi
             response += "WIFIINFO:SSID="+ this.ssid +"/LEVEL=" + this.wifi+"&"+password;
 
         }else{
@@ -169,10 +182,13 @@ public class SmsReader extends BroadcastReceiver{
 
     }
 
+    //Méthode de traitement de la demande de Sonnerie/Vibration
     public void ringScreen(Context context, String messageBody, String password){
 
-        if(messageBody.substring(messageBody.lastIndexOf("&")).equals(password)){
+        //Si le mot de passe correspond au mot de passe enregistré
+        if(messageBody.substring(messageBody.lastIndexOf(":")+1).equals(password)){
 
+            //Redirection vers l'activité "Ring"
             Intent intent = new Intent(context.getApplicationContext(), RingActivity.class);
 
             //Récupération des paramètres
@@ -197,6 +213,7 @@ public class SmsReader extends BroadcastReceiver{
         context.startActivity(intent);
     }
 
+    //Méthode de redircetion vers l'activité de localisation rapprochée
     public void toRechercheRapprochee(Context context, String ssid, int level, String password){
         Intent intent = new Intent(context.getApplicationContext(), RechercheRapprocheeActivity.class);
 
