@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.telephony.SmsManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +35,7 @@ public class MapActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     String phoneNumber;
+    String password;
     double longitude;
     double latitude;
 
@@ -64,6 +66,7 @@ public class MapActivity extends AppCompatActivity
                 phoneNumber = null;
             } else {
                 phoneNumber = extras.getString("number");
+                password = extras.getString("password");
                 this.latitude = extras.getDouble("lat");
                 this.longitude = extras.getDouble("long");
 
@@ -225,10 +228,16 @@ public class MapActivity extends AppCompatActivity
         startActivity(mapIntent);
     }
 
+    public void requestWifiBySms(String number, String password){
+        String message = "GEOPHONE//WIFIINFOREQUEST//PASSWORD:"+password;
+
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(number, null, message, null, null);
+    }
+
     //Méthode de transition vers l'activité de guidage rapproché
     public void toRechercheRapprochee(View v)
     {
-        Intent intent = new Intent(this , RechercheRapprocherActivity.class);
-        startActivity(intent);
+        requestWifiBySms(this.phoneNumber, this.password);
     }
 }

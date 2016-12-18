@@ -1,7 +1,6 @@
 package com.example.bouveti.geophone;
 
 import android.Manifest;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,7 +17,6 @@ import android.support.v7.app.AlertDialog;
 import android.telephony.SmsManager;
 import android.text.InputType;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -27,7 +25,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -35,12 +32,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+
 import java.util.Locale;
-import java.util.Set;
 
 public class RechercheActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -263,7 +256,7 @@ public class RechercheActivity extends AppCompatActivity
                     public void onClick(DialogInterface dialog, int which) {
                         String password = input.getText().toString();
 
-                        sendPositionBySMS(password, number);
+                        requestPositionBySMS(password, number);
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -302,7 +295,7 @@ public class RechercheActivity extends AppCompatActivity
     }
 
     //Méthode d'envois de la requête de position
-    public void sendPositionBySMS(String password, String number){
+    public void requestPositionBySMS(String password, String number){
 
         String message = "GEOPHONE//LOCATIONREQUEST//PASSWORD:"+password;
 

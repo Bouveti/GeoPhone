@@ -10,6 +10,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.telephony.SmsManager;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -234,4 +235,5 @@ public class RechercheRapprocherActivity extends AppCompatActivity
         overridePendingTransition(0,0);
         finish();
     }
+
 }

@@ -10,6 +10,8 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.v4.app.ActivityCompat;
@@ -30,6 +32,8 @@ public class SmsReader extends BroadcastReceiver{
     private GPSTracker tracker;
     private double latitude;
     private double longitude;
+    private int wifi;
+    private String ssid;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -76,7 +80,7 @@ public class SmsReader extends BroadcastReceiver{
     public void receiveMessage(Context context, String messageBody){
 
         //Si le SMS est une requête de position
-        if (messageBody.contains("GEOPHONE//LOCATIONREQUEST//")) {
+        if (messageBody.contains("REQUEST//")) {
 
             //Notification de la tentative de localisation
             this.notifPush(context);
@@ -87,35 +91,65 @@ public class SmsReader extends BroadcastReceiver{
         }else if(messageBody.contains("WRONG_PASSWORD")){
             //Blocage de la localisation
             this.denyLocation(context);
-        }else{
+        }else if(messageBody.contains("LOCATION")){
 
             //Sinon, parsing des coordonnées dans le SMS
-            Double longitudeReceived = Double.parseDouble(messageBody.substring(messageBody.lastIndexOf("=")+1));
+            Double longitudeReceived = Double.parseDouble(messageBody.substring(messageBody.lastIndexOf("=")+1,messageBody.lastIndexOf("~")));
             Double latitudeReceived = Double.parseDouble(messageBody.substring(44,messageBody.lastIndexOf("/")));
+            String password = messageBody.substring(messageBody.length()-4);
 
             //Redirection vers la navigation
-            this.toMap(context, latitudeReceived, longitudeReceived);
+            this.toMap(context, latitudeReceived, longitudeReceived ,password);
+        }else if(messageBody.contains("WIFI")){
+
+            String ssid = messageBody.substring(43,messageBody.lastIndexOf("/"));
+            int level = Integer.parseInt(messageBody.substring(messageBody.lastIndexOf("=")+1));
+
+            this.toRechercheRapprochee(context, ssid, level);
         }
     }
 
     //Méthode de traitement d'une requête de localisation
     public void sendResponse(Context context, String messageBody){
 
-        //Récupération des coordonnées GPS de l'appareil
-        this.latitude = this.tracker.getLatitude();
-        this.longitude = this.tracker.getLongitude();
+        int responseType = -1;
+        String response = "GEOPHONE//";
 
-        //Initialisation du message de réponse
-        String response = "GEOPHONE//LOCATIONRESPONSE//";
+        if (messageBody.contains("GEOPHONE//LOCATIONREQUEST//")) {
+            //Récupération des coordonnées GPS de l'appareil
+            this.latitude = this.tracker.getLatitude();
+            this.longitude = this.tracker.getLongitude();
+
+            //Initialisation du message de réponse
+            response += "LOCATIONRESPONSE//";
+            responseType = 1;
+
+        }else if (messageBody.contains("GEOPHONE//WIFIINFOREQUEST//")){
+
+            WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            int numberOfLevels = 5;
+            WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+            this.wifi = WifiManager.calculateSignalLevel(wifiInfo.getRssi(), numberOfLevels);
+            this.ssid = wifiInfo.getSSID();
+
+            response += "WIFIINFORESPONSE//";
+            responseType = 0;
+        }
+
         //Parsing du mot de passe reçu
         String passwordReceived = messageBody.substring(messageBody.length() - password.length());
 
         Log.d("Password:",passwordReceived);
 
         //Si le mot de passe reçu correspond à celui enregistré
-        if(passwordReceived.equals(password)){
+        if(passwordReceived.equals(password)&&responseType == 1){
             //Ajout des coordonnées au message de réponse
-            response += "LOCATION:GEOLAT=" + this.latitude + "/GEOLONG=" + this.longitude;
+            response += "LOCATION:GEOLAT=" + this.latitude + "/GEOLONG=" + this.longitude+"~"+password;
+
+        }else if(passwordReceived.equals(password)&&responseType == 0){
+            //Ajout de la force du signal Wifi
+            response += "WIFIINFO:SSID="+ this.ssid +"/LEVEL=" + this.wifi;
+
         }else{
             //Sinon, ajout de la mention "Mauvais mot de passe"
             response += "WRONG_PASSWORD";
@@ -139,16 +173,29 @@ public class SmsReader extends BroadcastReceiver{
     }
 
     //Méthode de redirection vers l'activité de locatlisation avec les coordonnées reçues en paramètres et le numéro envoyeur
-    public void toMap(Context context, Double latitude, Double longitude){
+    public void toMap(Context context, Double latitude, Double longitude, String password){
         Intent intent = new Intent(context.getApplicationContext(), MapActivity.class);
 
         //Récupération des paramètres
         intent.putExtra("lat", latitude);
         intent.putExtra("long", longitude);
         intent.putExtra("number",phoneNumber);
+        intent.putExtra("password",password);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         context.startActivity(intent);
+    }
+
+    public void toRechercheRapprochee(Context context, String ssid, int level){
+        Intent intent = new Intent(context.getApplicationContext(), MapActivity.class);
+
+        //Récupération des paramètres
+        intent.putExtra("ssid", ssid);
+        intent.putExtra("level", level);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        context.startActivity(intent);
+
     }
 
     //Méthode de notifiaction

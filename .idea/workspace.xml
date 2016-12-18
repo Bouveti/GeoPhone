@@ -54,18 +54,54 @@
       <file leaf-file-name="RechercheActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/RechercheActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="303" column="48" selection-start-line="303" selection-start-column="48" selection-end-line="303" selection-end-column="48" />
+            <state relative-caret-position="353">
+              <caret line="296" column="48" selection-start-line="296" selection-start-column="48" selection-end-line="296" selection-end-column="48" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SmsReader.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SmsReader.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/SmsReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2108">
-              <caret line="153" column="29" selection-start-line="153" selection-start-column="29" selection-end-line="153" selection-end-column="29" />
+            <state relative-caret-position="356">
+              <caret line="96" column="140" selection-start-line="96" selection-start-column="140" selection-end-line="96" selection-end-column="140" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MapActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/MapActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-550">
+              <caret line="68" column="56" selection-start-line="68" selection-start-column="56" selection-end-line="68" selection-end-column="56" />
+              <folding>
+                <element signature="e#8907#8908#0" expanded="true" />
+                <element signature="e#8972#8973#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="content_map.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_map.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="42" column="25" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RechercheRapprocherActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/RechercheRapprocherActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2631">
+              <caret line="237" column="0" selection-start-line="237" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -2330,12 +2366,13 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/InitialisationActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/ForgottenActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/MapActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/ParametreActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/PasswordActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/RecentActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/RechercheRapprocherActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/RechercheActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/RechercheRapprocherActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_map.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/MapActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/SmsReader.java" />
       </list>
     </option>
@@ -2901,17 +2938,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_map.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-484">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/GPSTracker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -2932,14 +2958,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="225" column="54" selection-start-line="225" selection-start-column="54" selection-end-line="225" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/MapActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="227" column="64" selection-start-line="227" selection-start-column="64" selection-end-line="227" selection-end-column="64" />
           <folding />
         </state>
       </provider>
@@ -2976,26 +2994,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/RechercheRapprocherActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_map.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="223" column="60" selection-start-line="223" selection-start-column="60" selection-end-line="223" selection-end-column="60" />
+        <state relative-caret-position="357">
+          <caret line="42" column="25" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/RechercheActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="303" column="48" selection-start-line="303" selection-start-column="48" selection-end-line="303" selection-end-column="48" />
+        <state relative-caret-position="353">
+          <caret line="296" column="48" selection-start-line="296" selection-start-column="48" selection-end-line="296" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/SmsReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2108">
-          <caret line="153" column="29" selection-start-line="153" selection-start-column="29" selection-end-line="153" selection-end-column="29" />
+        <state relative-caret-position="356">
+          <caret line="96" column="140" selection-start-line="96" selection-start-column="140" selection-end-line="96" selection-end-column="140" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/MapActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-550">
+          <caret line="68" column="56" selection-start-line="68" selection-start-column="56" selection-end-line="68" selection-end-column="56" />
+          <folding>
+            <element signature="e#8907#8908#0" expanded="true" />
+            <element signature="e#8972#8973#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/bouveti/geophone/RechercheRapprocherActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2631">
+          <caret line="237" column="0" selection-start-line="237" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
           <folding />
         </state>
       </provider>
