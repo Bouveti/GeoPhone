@@ -291,5 +291,9 @@ public class RechercheActivity extends AppCompatActivity
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(number, null, message, null, null);
 
+        Toast.makeText(RechercheActivity.this,
+                getString(R.string.message_envoye), Toast.LENGTH_SHORT)
+                .show();
+
     }
 }

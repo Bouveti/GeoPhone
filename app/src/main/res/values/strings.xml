@@ -52,6 +52,7 @@
     <string name="sure_exit">Etes-vous de vouloir quitter ?</string>
     <string name="oui">Oui</string>
     <string name="non">Non</string>
+    <string name="message_envoye">Demande envoyée, patientez s il vous plait...</string>
     <string name="erreur_wifi">Pas connecté sur un Wifi</string>
     <string name="title_activity_ring">RingActivity</string>
 </resources>

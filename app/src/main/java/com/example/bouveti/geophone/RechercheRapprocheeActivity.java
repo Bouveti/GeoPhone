@@ -29,17 +29,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.Locale;
 
-public class RechercheRapprocherActivity extends AppCompatActivity
+public class RechercheRapprocheeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     String wifiName;
     int intensityWifi;
+    String phoneNummber;
+    String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Récupération du layout de l'activité
-        setContentView(R.layout.activity_recherche_rapprocher);
+        setContentView(R.layout.activity_recherche_rapprochee);
         //Mise en place de la barre d'action
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -63,6 +65,10 @@ public class RechercheRapprocherActivity extends AppCompatActivity
             } else {
                 wifiName = extras.getString("ssid");
                 intensityWifi = extras.getInt("level");
+                phoneNummber = extras.getString("number");
+                password = extras.getString("password");
+
+                this.ring();
             }
         } else {
             wifiName = (String) savedInstanceState.getSerializable("ssid");
@@ -77,46 +83,6 @@ public class RechercheRapprocherActivity extends AppCompatActivity
         // Remplir la progressbar plus la puissance du signal du wifi est forte
         progressBar.setProgress(intensityWifi);
 
-        final Button button = (Button) findViewById(R.id.found);
-        final Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.meow);
-        final AudioManager audioManager = (AudioManager) this.getSystemService(AUDIO_SERVICE);
-
-        // Met le volume au max
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
-        mediaPlayer.setLooping(true);
-
-        //SOS en vibration et MORSE
-        int dot = 200;
-        int dash = 500;
-        int short_gap = 200;
-        int medium_gap = 500;
-        int long_gap = 1000;
-        final long[] pattern = { 0, dot, short_gap, dot, short_gap, dot, medium_gap, dash, short_gap, dash, short_gap, dash, medium_gap, dot, short_gap, dot, short_gap, dot, long_gap };
-
-        Switch aSwitch = (Switch) findViewById(R.id.switch_vibe_sound);
-        aSwitch.setChecked(false); // Fix les vibrations et la sonnerie par défault à false
-
-        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) //If sound and vibration are switched to on, start vibration and sound
-                {
-                    mediaPlayer.start();
-                    vibrator.vibrate(pattern, 0);
-                    button.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) { //Clic sur le boutton trouvé
-                            vibrator.cancel();
-                            mediaPlayer.pause();
-                        }
-                    });
-                } else {
-                    vibrator.cancel();
-                    mediaPlayer.pause();
-                }
-            }
-        }
-        );
     }
 
     //Appel lors de l'utilisation du bouton retour
@@ -166,20 +132,20 @@ public class RechercheRapprocherActivity extends AppCompatActivity
             if(lang.equals("en_US"))
             {
                 setLocale(Locale.FRANCE);
-                Toast.makeText(RechercheRapprocherActivity.this,
+                Toast.makeText(RechercheRapprocheeActivity.this,
                         getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.fr_fr);
             } else if (lang.equals("fr_FR"))
             {
                 setLocale(Locale.US);
-                Toast.makeText(RechercheRapprocherActivity.this,
+                Toast.makeText(RechercheRapprocheeActivity.this,
                         getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.en_us);
             } else {
                 setLocale(Locale.FRANCE);
-                Toast.makeText(RechercheRapprocherActivity.this,
+                Toast.makeText(RechercheRapprocheeActivity.this,
                         getString(R.string.change_lang), Toast.LENGTH_SHORT)
                         .show();
                 item.setIcon(R.drawable.fr_fr);
@@ -219,10 +185,20 @@ public class RechercheRapprocherActivity extends AppCompatActivity
         Configuration conf = res.getConfiguration();
         conf.locale = lang;
         res.updateConfiguration(conf, dm);
-        Intent refresh = new Intent(this, RechercheRapprocherActivity.class);
+        Intent refresh = new Intent(this, RechercheRapprocheeActivity.class);
         startActivity(refresh);
         overridePendingTransition(0,0);
         finish();
     }
+
+    public void ring(){
+
+        String message = "GEOPHONE//RING//PASSWORD:"+this.password;
+
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(this.phoneNummber, null, message, null, null);
+
+    }
+
 }
 

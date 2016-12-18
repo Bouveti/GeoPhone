@@ -6,10 +6,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -92,18 +88,21 @@ public class SmsReader extends BroadcastReceiver{
         }else if(messageBody.contains("LOCATION")){
 
             //Sinon, parsing des coordonnées dans le SMS
-            Double longitudeReceived = Double.parseDouble(messageBody.substring(messageBody.lastIndexOf("=")+1,messageBody.length()-5));
+            Double longitudeReceived = Double.parseDouble(messageBody.substring(messageBody.lastIndexOf("=")+1,messageBody.lastIndexOf("&")));
             Double latitudeReceived = Double.parseDouble(messageBody.substring(44,messageBody.lastIndexOf("/")));
-            String password = messageBody.substring(messageBody.length()-4);
+            String password = messageBody.substring(messageBody.lastIndexOf("&")+1);
 
             //Redirection vers la navigation
             this.toMap(context, latitudeReceived, longitudeReceived ,password);
         }else if(messageBody.contains("WIFI")){
 
             String ssid = messageBody.substring(43,messageBody.lastIndexOf("/"));
-            int level = Integer.parseInt(messageBody.substring(messageBody.lastIndexOf("=")+1));
+            int level = Integer.parseInt(messageBody.substring(messageBody.lastIndexOf("=")+1,messageBody.lastIndexOf("&")));
+            String password = messageBody.substring(messageBody.lastIndexOf("&")+1);
 
-            this.toRechercheRapprochee(context, ssid, level);
+            this.toRechercheRapprochee(context, ssid, level, password);
+        }else if(messageBody.contains("RING")){
+            this.ringScreen(context, messageBody, password);
         }
     }
 
@@ -146,7 +145,7 @@ public class SmsReader extends BroadcastReceiver{
 
         }else if(passwordReceived.equals(password)&&responseType == 0){
             //Ajout de la force du signal Wifi
-            response += "WIFIINFO:SSID="+ this.ssid +"/LEVEL=" + this.wifi;
+            response += "WIFIINFO:SSID="+ this.ssid +"/LEVEL=" + this.wifi+"&"+password;
 
         }else{
             //Sinon, ajout de la mention "Mauvais mot de passe"
@@ -170,6 +169,20 @@ public class SmsReader extends BroadcastReceiver{
 
     }
 
+    public void ringScreen(Context context, String messageBody, String password){
+
+        if(messageBody.substring(messageBody.lastIndexOf("&")).equals(password)){
+
+            Intent intent = new Intent(context.getApplicationContext(), RingActivity.class);
+
+            //Récupération des paramètres
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            context.startActivity(intent);
+
+        }
+    }
+
     //Méthode de redirection vers l'activité de locatlisation avec les coordonnées reçues en paramètres et le numéro envoyeur
     public void toMap(Context context, Double latitude, Double longitude, String password){
         Intent intent = new Intent(context.getApplicationContext(), MapActivity.class);
@@ -184,10 +197,12 @@ public class SmsReader extends BroadcastReceiver{
         context.startActivity(intent);
     }
 
-    public void toRechercheRapprochee(Context context, String ssid, int level){
-        Intent intent = new Intent(context.getApplicationContext(), RechercheRapprocherActivity.class);
+    public void toRechercheRapprochee(Context context, String ssid, int level, String password){
+        Intent intent = new Intent(context.getApplicationContext(), RechercheRapprocheeActivity.class);
 
         //Récupération des paramètres
+        intent.putExtra("number", this.phoneNumber);
+        intent.putExtra("password", password);
         intent.putExtra("ssid", ssid);
         intent.putExtra("level", level);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

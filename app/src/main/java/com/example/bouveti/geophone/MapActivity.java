@@ -219,6 +219,10 @@ public class MapActivity extends AppCompatActivity
 
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(number, null, message, null, null);
+
+        Toast.makeText(MapActivity.this,
+                getString(R.string.message_envoye), Toast.LENGTH_SHORT)
+                .show();
     }
 
     //Méthode de transition vers l'activité de guidage rapproché

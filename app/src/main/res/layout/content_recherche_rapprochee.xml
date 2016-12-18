@@ -10,8 +10,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.bouveti.geophone.RechercheRapprocherActivity"
-    tools:showIn="@layout/app_bar_recherche_rapprocher">
+    tools:context="com.example.bouveti.geophone.RechercheRapprocheeActivity"
+    tools:showIn="@layout/app_bar_recherche_rapprochee">
 
     <TextView
         android:text="@string/recherche_rapproche"
@@ -24,24 +24,6 @@
         android:textSize="30dp"
         />
 
-    <Switch
-        android:text="@string/sound_and_vibration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/switch_vibe_sound"
-        android:layout_below="@+id/progressBarWifi"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="65dp" />
-
-    <Button
-        android:text="@string/found"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/found"
-        android:onClick="Found"
-        android:layout_below="@+id/switch_vibe_sound"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="19dp" />
 
     <TextView
         android:text="@string/power_wifi"
@@ -49,7 +31,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView5"
         android:layout_marginBottom="15dp"
-        android:layout_above="@+id/switch_vibe_sound"
+        android:layout_above="@+id/textView4"
         android:layout_centerHorizontal="true" />
 
     <ProgressBar
